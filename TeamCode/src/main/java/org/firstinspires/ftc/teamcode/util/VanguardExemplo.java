@@ -6,14 +6,12 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import java.util.List;
-
 @TeleOp
 public class VanguardExemplo extends OpMode {
     public DcMotorEx lF, rF, lB, rB, intoiker;
 
     /** ordem: [lf, rf, lb, rb] */
-    public List<Double> powers;
+    public double[] powers = new double[4];
 
     @Override
     public void init() {
@@ -53,35 +51,29 @@ public class VanguardExemplo extends OpMode {
         double strafe = gamepad1.left_stick_x * 1.15;
         double turn = gamepad1.right_stick_x;
 
-        double lf = forward + strafe + turn;
-        double rf = forward - strafe - turn;
-        double lb = forward - strafe + turn;
-        double rb = forward + strafe - turn;
-
-        powers = List.of(lf, rf, lb, rb);
+        powers[0] = forward + strafe + turn; // lf
+        powers[1] = forward - strafe - turn; // rf
+        powers[2] = forward - strafe + turn; // lb
+        powers[3] = forward + strafe - turn; // rb
 
         double max = maximum(powers);
 
         if (max > 1) {
-            List<Double> alt = List.of();
-            for (Double val : powers) {
-                alt.add(val / max);
+            for (int i = 0; i < powers.length; i++) {
+                powers[i] /= max;
             }
-            powers = alt;
         }
 
-        lF.setPower(powers.get(0));
-        rF.setPower(powers.get(1));
-        lB.setPower(powers.get(2));
-        rB.setPower(powers.get(3));
+        lF.setPower(powers[0]);
+        rF.setPower(powers[1]);
+        lB.setPower(powers[2]);
+        rB.setPower(powers[3]);
     }
 
-    public double maximum(List<Double> vals) {
+    public double maximum(double[] vals) {
         double big = 0;
-        for (Double val : vals) {
-            if (val > big) {
-                big = val;
-            }
+        for (double val : vals) {
+            big = Math.max(big, Math.abs(val));
         }
 
         return big;
