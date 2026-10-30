@@ -5,9 +5,7 @@ Código da equipe **Vanguard** para a [FIRST Tech Challenge](https://www.firstin
 ## Estrutura
 
 ```
-TeamCode/src/main/java/org/firstinspires/ftc/teamcode/
-└── util/
-    └── VanguardExemplo.java   # TeleOp com drive mecanum + intake
+VanguardExemplo.java   # TeleOp com drive mecanum + intake
 ```
 
 ## OpModes
@@ -35,10 +33,10 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 
 ## Como usar
 
-Este repositório contém só a pasta `TeamCode`. Para rodar no robô:
+**OnBot Java (mais fácil):** abra o OnBot Java pelo navegador do Control Hub, crie a pasta `util` e cole o conteúdo de `VanguardExemplo.java` lá dentro.
+
+**Android Studio:**
 
 1. Baixe o [FTC SDK oficial](https://github.com/FIRST-Tech-Challenge/FtcRobotController).
-2. Copie a pasta `TeamCode/src/main/java/org/firstinspires/ftc/teamcode` deste repositório para dentro do SDK.
-3. Abra o projeto no Android Studio e faça o deploy no Control Hub.
-
-Também dá para colar o arquivo direto no **OnBot Java**, pelo navegador do Control Hub.
+2. Coloque `VanguardExemplo.java` em `TeamCode/src/main/java/org/firstinspires/ftc/teamcode/util/` (a pasta precisa bater com o `package` do arquivo).
+3. Faça o deploy no Control Hub.
