@@ -46,9 +46,7 @@ public class VanguardAuto extends LinearOpMode {
         waitForStart();
 
         // ===== SEQUÊNCIA DO AUTÔNOMO =====
-        andar(60);         // 60 cm pra frente
-        andarDeLado(30);   // 30 cm pra direita
-        andar(-20);        // 20 cm pra trás
+        andar(100);        // 100 cm pra frente
     }
 
     /** cm positivo = frente, negativo = trás */

@@ -36,11 +36,10 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 
 ### VanguardAuto (Autônomo)
 
-Autônomo que se move pelos encoders dos motores do drive (`RUN_TO_POSITION`), sem odometria. A sequência fica no fim do `runOpMode()`:
+Autônomo que se move pelos encoders dos motores do drive (`RUN_TO_POSITION`), sem odometria. Por enquanto ele só anda 100 cm pra frente. A sequência fica no fim do `runOpMode()` e também dá pra usar `andarDeLado(cm)` (positivo = direita):
 
 ```java
-andar(60);         // 60 cm pra frente (negativo = trás)
-andarDeLado(30);   // 30 cm pra direita (negativo = esquerda)
+andar(100);        // 100 cm pra frente (negativo = trás)
 ```
 
 Antes de usar, confira as constantes no topo do arquivo:
