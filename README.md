@@ -23,6 +23,8 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | 1 | Analógico esquerdo (X) | Andar de lado (strafe) |
 | 1 | Analógico direito (X) | Girar |
 | 2 | Analógico esquerdo (Y) | Intake |
+| 2 | A | Liga o shooter |
+| 2 | B | Desliga o shooter |
 
 **Configuração de hardware** (nomes no Robot Configuration do Driver Station):
 
@@ -33,13 +35,14 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | `LeftBack` | Motor traseiro esquerdo |
 | `RightBack` | Motor traseiro direito |
 | `intake` | Motor do intake |
+| `ShooterMotor1` | Motor do shooter |
 
 ### VanguardAuto (Autônomo)
 
-Autônomo que se move pelos encoders dos motores do drive (`RUN_TO_POSITION`), sem odometria. Por enquanto ele só anda 100 cm pra frente. A sequência fica no fim do `runOpMode()` e também dá pra usar `andarDeLado(cm)` (positivo = direita):
+Autônomo que se move pelos encoders dos motores do drive (`RUN_TO_POSITION`), sem odometria. Por enquanto ele só anda 50 cm pra direita. A sequência fica no fim do `runOpMode()` e também dá pra usar `andar(cm)` (positivo = frente):
 
 ```java
-andar(100);        // 100 cm pra frente (negativo = trás)
+andarDeLado(50);   // 50 cm pra direita (negativo = esquerda)
 ```
 
 Antes de usar, confira as constantes no topo do arquivo:

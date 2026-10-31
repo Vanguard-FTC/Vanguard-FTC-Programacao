@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp
 public class VanguardExemplo extends OpMode {
-    public DcMotorEx lF, rF, lB, rB, intoiker;
+    public DcMotorEx lF, rF, lB, rB, intoiker, shooter;
 
     /** ordem: [lf, rf, lb, rb] */
     public double[] powers = new double[4];
@@ -20,12 +20,14 @@ public class VanguardExemplo extends OpMode {
         lB = hardwareMap.get(DcMotorEx.class, "LeftBack");
         rB = hardwareMap.get(DcMotorEx.class, "RightBack");
         intoiker = hardwareMap.get(DcMotorEx.class, "intake");
+        shooter = hardwareMap.get(DcMotorEx.class, "ShooterMotor1");
 
         lF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lB.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rB.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         intoiker.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        shooter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         lF.setDirection(DcMotorSimple.Direction.REVERSE);
         lB.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -38,12 +40,20 @@ public class VanguardExemplo extends OpMode {
         lB.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rB.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         intoiker.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        shooter.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     @Override
     public void loop() {
         drive();
         intoiker.setPower(gamepad2.left_stick_y);
+
+        // shooter: A liga, B desliga
+        if (gamepad2.a) {
+            shooter.setPower(1);
+        } else if (gamepad2.b) {
+            shooter.setPower(0);
+        }
     }
 
     public void drive() {
