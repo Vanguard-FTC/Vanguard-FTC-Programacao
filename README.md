@@ -22,7 +22,7 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | 1 | Analógico esquerdo (Y) | Frente / ré |
 | 1 | Analógico esquerdo (X) | Andar de lado (strafe) |
 | 1 | Analógico direito (X) | Girar |
-| 2 | Analógico esquerdo (Y) | Intake |
+| 2 | Analógico direito (Y) | Intake (os dois motores) |
 | 2 | R2 (segurar) | Shooter |
 
 **Configuração de hardware** (nomes no Robot Configuration do Driver Station):
@@ -33,7 +33,8 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | `RightFront` | Motor dianteiro direito |
 | `LeftBack` | Motor traseiro esquerdo |
 | `RightBack` | Motor traseiro direito |
-| `intake` | Motor do intake |
+| `IntakeMotor1` | Motor 1 do intake |
+| `Intakemotor2` | Motor 2 do intake |
 | `ShooterMotor1` | Motor do shooter |
 
 ### VanguardAuto (Autônomo)

@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp
 public class VanguardExemplo extends OpMode {
-    public DcMotorEx lF, rF, lB, rB, intoiker, shooter;
+    public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
 
     /** ordem: [lf, rf, lb, rb] */
     public double[] powers = new double[4];
@@ -19,7 +19,8 @@ public class VanguardExemplo extends OpMode {
         rF = hardwareMap.get(DcMotorEx.class, "RightFront");
         lB = hardwareMap.get(DcMotorEx.class, "LeftBack");
         rB = hardwareMap.get(DcMotorEx.class, "RightBack");
-        intoiker = hardwareMap.get(DcMotorEx.class, "intake");
+        intoiker = hardwareMap.get(DcMotorEx.class, "IntakeMotor1");
+        intoiker2 = hardwareMap.get(DcMotorEx.class, "Intakemotor2");
         shooter = hardwareMap.get(DcMotorEx.class, "ShooterMotor1");
 
         lF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -27,6 +28,7 @@ public class VanguardExemplo extends OpMode {
         lB.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rB.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         intoiker.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intoiker2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         shooter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         lF.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -40,13 +42,16 @@ public class VanguardExemplo extends OpMode {
         lB.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rB.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         intoiker.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        intoiker2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         shooter.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     @Override
     public void loop() {
         drive();
-        intoiker.setPower(gamepad2.left_stick_y);
+        // intake: os dois motores juntos, no mesmo sentido
+        intoiker.setPower(gamepad2.right_stick_y);
+        intoiker2.setPower(gamepad2.right_stick_y);
 
         // shooter: liga enquanto segura o R2
         shooter.setPower(gamepad2.right_trigger > 0.1 ? 1 : 0);
