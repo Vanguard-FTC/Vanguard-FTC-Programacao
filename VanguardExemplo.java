@@ -20,7 +20,7 @@ public class VanguardExemplo extends OpMode {
         lB = hardwareMap.get(DcMotorEx.class, "LeftBack");
         rB = hardwareMap.get(DcMotorEx.class, "RightBack");
         intoiker = hardwareMap.get(DcMotorEx.class, "IntakeMotor1");
-        intoiker2 = hardwareMap.get(DcMotorEx.class, "Intakemotor2");
+        intoiker2 = hardwareMap.get(DcMotorEx.class, "IntakeMotor2");
         shooter = hardwareMap.get(DcMotorEx.class, "ShooterMotor1");
 
         lF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

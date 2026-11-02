@@ -34,7 +34,7 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | `LeftBack` | Motor traseiro esquerdo |
 | `RightBack` | Motor traseiro direito |
 | `IntakeMotor1` | Motor 1 do intake |
-| `Intakemotor2` | Motor 2 do intake |
+| `IntakeMotor2` | Motor 2 do intake |
 | `ShooterMotor1` | Motor do shooter |
 
 ### VanguardAuto (Autônomo)
