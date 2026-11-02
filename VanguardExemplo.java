@@ -48,12 +48,8 @@ public class VanguardExemplo extends OpMode {
         drive();
         intoiker.setPower(gamepad2.left_stick_y);
 
-        // shooter: A liga, B desliga
-        if (gamepad2.a) {
-            shooter.setPower(1);
-        } else if (gamepad2.b) {
-            shooter.setPower(0);
-        }
+        // shooter: liga enquanto segura o R2
+        shooter.setPower(gamepad2.right_trigger > 0.1 ? 1 : 0);
     }
 
     public void drive() {
