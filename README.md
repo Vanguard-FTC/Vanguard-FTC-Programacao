@@ -2,7 +2,7 @@
 
 Código da equipe **Vanguard** para a [FIRST Tech Challenge](https://www.firstinspires.org/robotics/ftc).
 
-🌐 **Site da equipe:** https://gabriel-pasi.github.io/Vanguard-FTC---Site/
+🌐 **Site da equipe:** https://vanguard-ftc.github.io/Vanguard-FTC-Site/
 
 ## Estrutura
 
