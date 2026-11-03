@@ -15,13 +15,13 @@ public class VanguardExemplo extends OpMode {
 
     @Override
     public void init() {
-        lF = hardwareMap.get(DcMotorEx.class, "LeftFront");
-        rF = hardwareMap.get(DcMotorEx.class, "RightFront");
-        lB = hardwareMap.get(DcMotorEx.class, "LeftBack");
-        rB = hardwareMap.get(DcMotorEx.class, "RightBack");
+        lF = hardwareMap.get(DcMotorEx.class, "frontLeftMotor");
+        rF = hardwareMap.get(DcMotorEx.class, "frontRightMotor");
+        lB = hardwareMap.get(DcMotorEx.class, "backLeftMotor");
+        rB = hardwareMap.get(DcMotorEx.class, "backRightMotor");
         intoiker = hardwareMap.get(DcMotorEx.class, "IntakeMotor1");
         intoiker2 = hardwareMap.get(DcMotorEx.class, "IntakeMotor2");
-        shooter = hardwareMap.get(DcMotorEx.class, "ShooterMotor1");
+        shooter = hardwareMap.get(DcMotorEx.class, "ShooterMotor");
 
         lF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

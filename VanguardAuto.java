@@ -28,10 +28,10 @@ public class VanguardAuto extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        lF = hardwareMap.get(DcMotorEx.class, "LeftFront");
-        rF = hardwareMap.get(DcMotorEx.class, "RightFront");
-        lB = hardwareMap.get(DcMotorEx.class, "LeftBack");
-        rB = hardwareMap.get(DcMotorEx.class, "RightBack");
+        lF = hardwareMap.get(DcMotorEx.class, "frontLeftMotor");
+        rF = hardwareMap.get(DcMotorEx.class, "frontRightMotor");
+        lB = hardwareMap.get(DcMotorEx.class, "backLeftMotor");
+        rB = hardwareMap.get(DcMotorEx.class, "backRightMotor");
 
         lF.setDirection(DcMotorSimple.Direction.REVERSE);
         lB.setDirection(DcMotorSimple.Direction.REVERSE);
