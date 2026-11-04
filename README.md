@@ -22,8 +22,9 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | 1 | Analógico esquerdo (Y) | Frente / ré |
 | 1 | Analógico esquerdo (X) | Andar de lado (strafe) |
 | 1 | Analógico direito (X) | Girar |
+| 1 | R2 (segurar) | Modo lento (40%) |
 | 2 | Analógico direito (Y) | Intake (os dois motores) |
-| 2 | R2 (segurar) | Shooter |
+| 2 | R2 (segurar) | Shooter (velocidade fixa, `SHOOTER_RPM`) |
 
 **Configuração de hardware** (nomes no Robot Configuration do Driver Station):
 
