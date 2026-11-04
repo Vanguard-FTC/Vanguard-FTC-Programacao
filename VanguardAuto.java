@@ -18,8 +18,8 @@ public class VanguardAuto extends LinearOpMode {
     static final double DIAMETRO_RODA_CM = 10.4;
     /** o strafe escorrega mais, então precisa de mais ticks pra mesma distância */
     static final double FATOR_STRAFE = 1.15;
-    /** -1 porque no TeleOp potência negativa = frente. Se andar ao contrário, troque pra 1 */
-    static final int FRENTE = -1;
+    /** 1 porque no TeleOp potência positiva = frente. Se andar ao contrário, troque pra -1 */
+    static final int FRENTE = 1;
     static final double VELOCIDADE = 0.5;
     /** tempo máximo de cada movimento, pra não travar se o robô bater em algo */
     static final double TIMEOUT_S = 5;
@@ -58,7 +58,7 @@ public class VanguardAuto extends LinearOpMode {
     /** cm positivo = direita, negativo = esquerda */
     public void andarDeLado(double cm) {
         int t = (int) Math.round(cm * TICKS_POR_CM * FATOR_STRAFE);
-        mover(t, -t, -t, t);
+        mover(-t, t, t, -t);
     }
 
     /** move cada motor a quantidade de ticks indicada. ordem: [lf, rf, lb, rb] */

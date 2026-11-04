@@ -73,8 +73,8 @@ public class VanguardExemplo extends OpMode {
     }
 
     public void drive() {
-        double forward = gamepad1.left_stick_y;
-        double strafe = gamepad1.left_stick_x * 1.15;
+        double forward = -gamepad1.left_stick_y;
+        double strafe = -gamepad1.left_stick_x * 1.15;
         double turn = gamepad1.right_stick_x;
 
         // modo lento: enquanto segura o R2 do controle 1

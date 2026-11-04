@@ -53,7 +53,7 @@ Antes de usar, confira as constantes no topo do arquivo:
 | `TICKS_POR_VOLTA` | Ticks por volta do motor | `537.7` (goBILDA 312 RPM) |
 | `DIAMETRO_RODA_CM` | Diâmetro da roda | `10.4` (mecanum goBILDA 104 mm) |
 | `FATOR_STRAFE` | Correção do andar de lado | `1.15` |
-| `FRENTE` | Sentido da frente (`-1` ou `1`) | `-1` |
+| `FRENTE` | Sentido da frente (`-1` ou `1`) | `1` |
 | `VELOCIDADE` | Potência dos motores | `0.5` |
 
 ## Como usar
