@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 public class VanguardExemplo extends OpMode {
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
 
-    /** ticks por volta do motor do shooter (goBILDA 6000 RPM / 1:1 = 28) */
+    /** ticks por volta do motor do shooter (REV HD Hex sem caixa = 28, máx ~6000 RPM) */
     static final double SHOOTER_TICKS_POR_VOLTA = 28;
     /** velocidade do shooter em RPM: ajuste até o lançamento ficar bom */
     static final double SHOOTER_RPM = 4000;
