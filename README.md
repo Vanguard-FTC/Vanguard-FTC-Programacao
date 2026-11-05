@@ -9,6 +9,7 @@ Código da equipe **Vanguard** para a [FIRST Tech Challenge](https://www.firstin
 ```
 VanguardExemplo.java   # TeleOp com drive mecanum + intake
 VanguardAuto.java      # Autônomo pelos encoders dos motores
+VanguardTesteMotores.java # Teste: gira cada motor do drive separado
 ```
 
 ## OpModes
