@@ -69,6 +69,8 @@ public class VanguardExemplo extends OpMode {
         telemetry.addData("Shooter (RPM)", "%.0f / %.0f",
                 shooter.getVelocity() * 60 / SHOOTER_TICKS_POR_VOLTA, SHOOTER_RPM);
         telemetry.addData("Modo lento", gamepad1.right_trigger > 0.1);
+        telemetry.addData("Analógico esq. (X, Y)", "%.2f, %.2f", gamepad1.left_stick_x, gamepad1.left_stick_y);
+        telemetry.addData("Potência lf rf lb rb", "%.2f %.2f %.2f %.2f", powers[0], powers[1], powers[2], powers[3]);
         telemetry.update();
     }
 
