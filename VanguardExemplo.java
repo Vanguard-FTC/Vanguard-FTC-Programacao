@@ -41,10 +41,12 @@ public class VanguardExemplo extends OpMode {
         intoiker = hardwareMap.get(DcMotorEx.class, "IntakeMotor1");
         intoiker2 = hardwareMap.get(DcMotorEx.class, "IntakeMotor2");
         shooter = hardwareMap.get(DcMotorEx.class, "ShooterMotor");
-        limelight = hardwareMap.get(Limelight3A.class, "limelight");
-
-        limelight.setPollRateHz(100);
-        limelight.pipelineSwitch(0); // pipeline 0 = AprilTag
+        // a câmera é opcional: sem ela o TeleOp funciona, só não tem modo mira
+        limelight = hardwareMap.tryGet(Limelight3A.class, "limelight");
+        if (limelight != null) {
+            limelight.setPollRateHz(100);
+            limelight.pipelineSwitch(0); // pipeline 0 = AprilTag
+        }
 
         lF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -60,7 +62,7 @@ public class VanguardExemplo extends OpMode {
 
     @Override
     public void start() {
-        limelight.start();
+        if (limelight != null) limelight.start();
         lF.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rF.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         lB.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -91,7 +93,7 @@ public class VanguardExemplo extends OpMode {
 
     @Override
     public void stop() {
-        limelight.stop();
+        if (limelight != null) limelight.stop();
     }
 
     public void drive() {
@@ -100,7 +102,9 @@ public class VanguardExemplo extends OpMode {
         double turn = gamepad1.right_stick_x;
 
         // modo mira: enquanto segura o A, o robô gira sozinho até a AprilTag
-        if (gamepad1.a) {
+        if (gamepad1.a && limelight == null) {
+            telemetry.addData("Mira", "Limelight não configurada");
+        } else if (gamepad1.a) {
             LLResult result = limelight.getLatestResult();
             if (result != null && result.isValid()) {
                 double erro = result.getTx(); // graus: positivo = alvo à direita
