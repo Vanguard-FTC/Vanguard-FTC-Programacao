@@ -24,6 +24,7 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | 1 | Analógico esquerdo (X) | Andar de lado (strafe) |
 | 1 | Analógico direito (X) | Girar |
 | 1 | R2 (segurar) | Modo lento (40%) |
+| 1 | A (segurar) | Modo mira: gira sozinho até a AprilTag (Limelight) |
 | 2 | Analógico direito (Y) | Intake (os dois motores) |
 | 2 | R2 (segurar) | Shooter (velocidade fixa, `SHOOTER_RPM`) |
 
@@ -38,6 +39,7 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | `IntakeMotor1` | Motor 1 do intake |
 | `IntakeMotor2` | Motor 2 do intake |
 | `ShooterMotor` | Motor do shooter |
+| `limelight` | Câmera Limelight 3A (pipeline 0 = AprilTag) |
 
 ### VanguardAuto (Autônomo)
 

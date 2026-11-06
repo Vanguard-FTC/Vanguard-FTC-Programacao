@@ -15,6 +15,7 @@ OpMode novo ou alterado deve usar exatamente estes nomes no `hardwareMap.get`:
 | `IntakeMotor1` | Intake 1 |
 | `IntakeMotor2` | Intake 2 |
 | `ShooterMotor` | Shooter |
+| `limelight` | Câmera Limelight 3A |
 
 Só mude esses nomes se a equipe pedir explicitamente.
 
