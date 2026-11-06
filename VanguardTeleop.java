@@ -8,10 +8,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@TeleOp(name = "VanguardTeleop " + VanguardExemplo.VERSAO)
-public class VanguardExemplo extends OpMode {
+@TeleOp(name = "VanguardTeleop " + VanguardTeleop.VERSAO)
+public class VanguardTeleop extends OpMode {
     /** versão do TeleOp: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.1.0";
+    public static final String VERSAO = "0.1.1";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
     public Limelight3A limelight;

@@ -7,14 +7,14 @@ Código da equipe **Vanguard** para a [FIRST Tech Challenge](https://www.firstin
 ## Estrutura
 
 ```
-VanguardExemplo.java   # TeleOp com drive mecanum + intake
+VanguardTeleop.java    # TeleOp com drive mecanum + intake
 VanguardAuto.java      # Autônomo pelos encoders dos motores
 VanguardTesteMotores.java # Teste: gira cada motor do drive separado
 ```
 
 ## OpModes
 
-### VanguardTeleop (`VanguardExemplo.java`)
+### VanguardTeleop (`VanguardTeleop.java`)
 
 Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 
@@ -62,6 +62,9 @@ Antes de usar, confira as constantes no topo do arquivo:
 ## Patch notes
 
 O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
+
+### VanguardTeleop 0.1.1 (2026-11-06)
+- Arquivo renomeado de `VanguardExemplo.java` pra `VanguardTeleop.java`.
 
 ### VanguardTeleop 0.1.0 / VanguardAuto 0.1.0 (2026-11-06)
 - Início da numeração de versões.
