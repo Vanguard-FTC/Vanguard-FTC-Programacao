@@ -19,6 +19,18 @@ OpMode novo ou alterado deve usar exatamente estes nomes no `hardwareMap.get`:
 
 Só mude esses nomes se a equipe pedir explicitamente.
 
+## Versões e patch notes (SEMPRE)
+
+Toda atualização do TeleOp ou do Auto precisa:
+
+1. **Aumentar a versão** do OpMode alterado, na constante `VERSAO` no topo do arquivo
+   (`VanguardExemplo.java` → `VanguardTeleop`, `VanguardAuto.java` → `VanguardAuto`).
+   O nome no Driver Station vem dela (ex: `VanguardTeleop 0.1.26`).
+   - Mudança normal: aumente o último número (`0.1.0` → `0.1.1`).
+   - Mudança grande (ex: novo mecanismo, auto novo): aumente o do meio e zere o último (`0.1.7` → `0.2.0`).
+2. **Adicionar uma entrada nas Patch notes do README**, a mais nova no topo, com
+   `### VanguardTeleop X.Y.Z (data)` (e/ou `VanguardAuto`) e uma lista curta do que mudou, em português simples.
+
 ## Outras notas
 
 - A equipe programa pelo **OnBot Java**: nada de bibliotecas externas (Gradle).

@@ -14,7 +14,7 @@ VanguardTesteMotores.java # Teste: gira cada motor do drive separado
 
 ## OpModes
 
-### VanguardExemplo (TeleOp)
+### VanguardTeleop (`VanguardExemplo.java`)
 
 Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 
@@ -41,7 +41,7 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | `ShooterMotor` | Motor do shooter |
 | `limelight` | Câmera Limelight 3A (pipeline 0 = AprilTag) |
 
-### VanguardAuto (Autônomo)
+### VanguardAuto (`VanguardAuto.java`)
 
 Autônomo que se move pelos encoders dos motores do drive (`RUN_TO_POSITION`), sem odometria. Por enquanto ele só anda 50 cm pra direita. A sequência fica no fim do `runOpMode()` e também dá pra usar `andar(cm)` (positivo = frente):
 
@@ -58,6 +58,15 @@ Antes de usar, confira as constantes no topo do arquivo:
 | `FATOR_STRAFE` | Correção do andar de lado | `1.15` |
 | `FRENTE` | Sentido da frente (`-1` ou `1`) | `1` |
 | `VELOCIDADE` | Potência dos motores | `0.5` |
+
+## Patch notes
+
+O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
+
+### VanguardTeleop 0.1.0 / VanguardAuto 0.1.0 (2026-11-06)
+- Início da numeração de versões.
+- TeleOp: drive mecanum, modo lento (R2 do controle 1), modo mira com Limelight (A do controle 1, câmera opcional), intake com 2 motores (analógico direito do controle 2) e shooter com velocidade fixa (R2 do controle 2).
+- Auto: anda 50 cm pra direita, pelos encoders.
 
 ## Como usar
 

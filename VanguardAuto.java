@@ -7,8 +7,11 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous
+@Autonomous(name = "VanguardAuto " + VanguardAuto.VERSAO)
 public class VanguardAuto extends LinearOpMode {
+    /** versão do autônomo: aumente a cada atualização (ver README, Patch notes) */
+    public static final String VERSAO = "0.1.0";
+
     public DcMotorEx lF, rF, lB, rB;
 
     // ===== AJUSTE AQUI PRO ROBÔ DE VOCÊS =====
@@ -41,7 +44,7 @@ public class VanguardAuto extends LinearOpMode {
             m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
 
-        telemetry.addLine("Pronto");
+        telemetry.addLine("VanguardAuto " + VERSAO + " pronto");
         telemetry.update();
         waitForStart();
 

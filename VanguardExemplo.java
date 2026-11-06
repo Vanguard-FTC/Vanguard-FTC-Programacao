@@ -8,8 +8,11 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@TeleOp
+@TeleOp(name = "VanguardTeleop " + VanguardExemplo.VERSAO)
 public class VanguardExemplo extends OpMode {
+    /** versão do TeleOp: aumente a cada atualização (ver README, Patch notes) */
+    public static final String VERSAO = "0.1.0";
+
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
     public Limelight3A limelight;
 
@@ -83,6 +86,7 @@ public class VanguardExemplo extends OpMode {
         // shooter: liga enquanto segura o R2, sempre na mesma velocidade
         shooter.setVelocity(gamepad2.right_trigger > 0.1 ? SHOOTER_VELOCIDADE : 0);
 
+        telemetry.addData("Versão", "VanguardTeleop " + VERSAO);
         telemetry.addData("Shooter (RPM)", "%.0f / %.0f",
                 shooter.getVelocity() * 60 / SHOOTER_TICKS_POR_VOLTA, SHOOTER_RPM);
         telemetry.addData("Modo lento", gamepad1.right_trigger > 0.1);
