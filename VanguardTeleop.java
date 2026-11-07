@@ -11,15 +11,15 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp(name = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardTeleop extends OpMode {
     /** versão do TeleOp: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.1.2";
+    public static final String VERSAO = "0.1.3";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
     public Limelight3A limelight;
 
     /** ticks por volta do motor do shooter (REV HD Hex sem caixa = 28, máx ~6000 RPM) */
     static final double SHOOTER_TICKS_POR_VOLTA = 28;
-    /** velocidade máxima do REV HD Hex sem caixa */
-    static final double SHOOTER_RPM_MAX = 6000;
+    /** 100% do shooter = 4000 RPM (o motor aguenta até ~6000) */
+    static final double SHOOTER_RPM_MAX = 4000;
     /** ===== FORÇA DO SHOOTER: mude aqui pra testar (0.87 = 87%) ===== */
     static final double SHOOTER_FORCA = 0.87;
     static final double SHOOTER_RPM = SHOOTER_RPM_MAX * SHOOTER_FORCA;

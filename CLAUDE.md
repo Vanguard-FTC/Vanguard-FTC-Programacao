@@ -30,6 +30,7 @@ Toda atualização do TeleOp ou do Auto precisa:
    - Mudança grande (ex: novo mecanismo, auto novo): aumente o do meio e zere o último (`0.1.7` → `0.2.0`).
 2. **Adicionar uma entrada nas Patch notes do README**, a mais nova no topo, com
    `### VanguardTeleop X.Y.Z (data)` (e/ou `VanguardAuto`) e uma lista curta do que mudou, em português simples.
+   Toda entrada do TeleOp também lista os controles atuais, separados em **Controle 1** e **Controle 2**.
 
 ## Outras notas
 

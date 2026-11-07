@@ -64,9 +64,23 @@ Antes de usar, confira as constantes no topo do arquivo:
 
 O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
 
+### VanguardTeleop 0.1.3 (2026-11-07)
+- 100% do shooter agora é 4000 RPM. Com `SHOOTER_FORCA = 0.87`, ele gira a 3480 RPM.
+
+**Controle 1 (piloto)**
+- Analógico esquerdo: andar (frente, trás e lados)
+- Analógico direito: girar
+- R2 (segurar): modo lento (40%)
+- A no Xbox / X no PlayStation (segurar): modo mira com a Limelight
+
+**Controle 2 (mecanismos)**
+- L2 (segurar): intake 1
+- R2 (segurar): intake 2
+- X no PlayStation / A no Xbox: liga/desliga o shooter
+
 ### VanguardTeleop 0.1.2 (2026-11-07)
 - Shooter agora liga e desliga no X do controle 2 (aperta uma vez liga, de novo desliga).
-- Força do shooter em 87% (5220 RPM), na variável `SHOOTER_FORCA`.
+- Força do shooter em 87%, na variável `SHOOTER_FORCA`.
 - Intake 1 no L2 e intake 2 no R2 do controle 2, separados.
 
 ### VanguardTeleop 0.1.1 (2026-11-06)
