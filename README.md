@@ -25,8 +25,9 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | 1 | Analógico direito (X) | Girar |
 | 1 | R2 (segurar) | Modo lento (40%) |
 | 1 | A (segurar) | Modo mira: gira sozinho até a AprilTag (Limelight) |
-| 2 | Analógico direito (Y) | Intake (os dois motores) |
-| 2 | R2 (segurar) | Shooter (velocidade fixa, `SHOOTER_RPM`) |
+| 2 | L2 (segurar) | Intake 1 |
+| 2 | R2 (segurar) | Intake 2 |
+| 2 | X (PlayStation) / A (Xbox) | Liga/desliga o shooter (força em `SHOOTER_FORCA`) |
 
 **Configuração de hardware** (nomes no Robot Configuration do Driver Station):
 
@@ -62,6 +63,11 @@ Antes de usar, confira as constantes no topo do arquivo:
 ## Patch notes
 
 O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
+
+### VanguardTeleop 0.1.2 (2026-11-07)
+- Shooter agora liga e desliga no X do controle 2 (aperta uma vez liga, de novo desliga).
+- Força do shooter em 87% (5220 RPM), na variável `SHOOTER_FORCA`.
+- Intake 1 no L2 e intake 2 no R2 do controle 2, separados.
 
 ### VanguardTeleop 0.1.1 (2026-11-06)
 - Arquivo renomeado de `VanguardExemplo.java` pra `VanguardTeleop.java`.

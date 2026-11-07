@@ -11,16 +11,27 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp(name = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardTeleop extends OpMode {
     /** versão do TeleOp: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.1.1";
+    public static final String VERSAO = "0.1.2";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
     public Limelight3A limelight;
 
     /** ticks por volta do motor do shooter (REV HD Hex sem caixa = 28, máx ~6000 RPM) */
     static final double SHOOTER_TICKS_POR_VOLTA = 28;
-    /** velocidade do shooter em RPM: ajuste até o lançamento ficar bom */
-    static final double SHOOTER_RPM = 4000;
+    /** velocidade máxima do REV HD Hex sem caixa */
+    static final double SHOOTER_RPM_MAX = 6000;
+    /** ===== FORÇA DO SHOOTER: mude aqui pra testar (0.87 = 87%) ===== */
+    static final double SHOOTER_FORCA = 0.87;
+    static final double SHOOTER_RPM = SHOOTER_RPM_MAX * SHOOTER_FORCA;
     static final double SHOOTER_VELOCIDADE = SHOOTER_RPM * SHOOTER_TICKS_POR_VOLTA / 60; // ticks por segundo
+
+    /** potência dos intakes (troque o sinal se girar ao contrário) */
+    static final double INTAKE1_FORCA = 1.0;
+    static final double INTAKE2_FORCA = 1.0;
+
+    /** shooter ligado/desligado (liga e desliga no X do controle 2) */
+    boolean shooterLigado = false;
+    boolean xAnterior = false;
 
     /** potência do drive no modo lento (R2 do controle 1) */
     static final double MODO_LENTO = 0.4;
@@ -80,13 +91,21 @@ public class VanguardTeleop extends OpMode {
     public void loop() {
         drive();
         // intake: os dois motores juntos, no mesmo sentido
-        intoiker.setPower(gamepad2.right_stick_y);
-        intoiker2.setPower(gamepad2.right_stick_y);
+        // intake 1 no L2 e intake 2 no R2 (controle 2), enquanto segura
+        intoiker.setPower(gamepad2.left_trigger > 0.1 ? INTAKE1_FORCA : 0);
+        intoiker2.setPower(gamepad2.right_trigger > 0.1 ? INTAKE2_FORCA : 0);
 
         // shooter: liga enquanto segura o R2, sempre na mesma velocidade
-        shooter.setVelocity(gamepad2.right_trigger > 0.1 ? SHOOTER_VELOCIDADE : 0);
+        // aperta X (controle 2) uma vez liga, aperta de novo desliga
+        // (X no PlayStation = A no Xbox)
+        if (gamepad2.a && !xAnterior) {
+            shooterLigado = !shooterLigado;
+        }
+        xAnterior = gamepad2.a;
+        shooter.setVelocity(shooterLigado ? SHOOTER_VELOCIDADE : 0);
 
         telemetry.addData("Versão", "VanguardTeleop " + VERSAO);
+        telemetry.addData("Shooter", shooterLigado ? "LIGADO (%.0f%%)" : "desligado", SHOOTER_FORCA * 100);
         telemetry.addData("Shooter (RPM)", "%.0f / %.0f",
                 shooter.getVelocity() * 60 / SHOOTER_TICKS_POR_VOLTA, SHOOTER_RPM);
         telemetry.addData("Modo lento", gamepad1.right_trigger > 0.1);
