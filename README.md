@@ -44,10 +44,10 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 
 ### VanguardAuto (`VanguardAuto.java`)
 
-Autônomo que se move pelos encoders dos motores do drive (`RUN_TO_POSITION`), sem odometria. Por enquanto ele só anda 50 cm pra direita. A sequência fica no fim do `runOpMode()` e também dá pra usar `andar(cm)` (positivo = frente):
+Autônomo que se move pelos encoders dos motores do drive (`RUN_TO_POSITION`), sem odometria. Por enquanto ele só anda 25 cm pra direita. A sequência fica no fim do `runOpMode()` e também dá pra usar `andar(cm)` (positivo = frente):
 
 ```java
-andarDeLado(50);   // 50 cm pra direita (negativo = esquerda)
+andarDeLado(25);   // 25 cm pra direita (negativo = esquerda)
 ```
 
 Antes de usar, confira as constantes no topo do arquivo:
@@ -63,6 +63,9 @@ Antes de usar, confira as constantes no topo do arquivo:
 ## Patch notes
 
 O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
+
+### VanguardAuto 0.1.1 (2026-11-07)
+- O auto agora anda metade da distância: `andarDeLado(50)` virou `andarDeLado(25)`.
 
 ### VanguardTeleop 0.1.3 (2026-11-07)
 - 100% do shooter agora é 4000 RPM. Com `SHOOTER_FORCA = 0.87`, ele gira a 3480 RPM.

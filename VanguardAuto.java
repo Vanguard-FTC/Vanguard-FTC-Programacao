@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @Autonomous(name = "VanguardAuto " + VanguardAuto.VERSAO)
 public class VanguardAuto extends LinearOpMode {
     /** versão do autônomo: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.1.0";
+    public static final String VERSAO = "0.1.1";
 
     public DcMotorEx lF, rF, lB, rB;
 
@@ -49,7 +49,7 @@ public class VanguardAuto extends LinearOpMode {
         waitForStart();
 
         // ===== SEQUÊNCIA DO AUTÔNOMO =====
-        andarDeLado(50);   // 50 cm pra direita
+        andarDeLado(25);   // 25 cm pra direita (metade de antes)
     }
 
     /** cm positivo = frente, negativo = trás */
