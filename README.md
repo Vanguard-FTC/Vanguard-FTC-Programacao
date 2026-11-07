@@ -78,6 +78,18 @@ O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0
 - R2 (segurar): intake 2
 - X no PlayStation / A no Xbox: liga/desliga o shooter
 
+**Como mudar a força do shooter**
+1. No OnBot Java, abram o `VanguardTeleop.java`.
+2. Lá no topo, achem esta linha:
+   ```java
+   static final double SHOOTER_FORCA = 0.87;
+   ```
+3. Troquem o número. `1.0` = 100% (4000 RPM), `0.87` = 87% (3480 RPM), `0.5` = 50% (2000 RPM).
+4. Cliquem em **Build** e rodem o TeleOp de novo.
+5. Liguem o shooter (X) e confiram no Driver Station se o **Shooter (RPM)** chegou perto do alvo.
+
+Dica: mudem de pouco em pouco (ex: `0.87` → `0.90`) e testem alguns lançamentos antes de mudar de novo.
+
 ### VanguardTeleop 0.1.2 (2026-11-07)
 - Shooter agora liga e desliga no X do controle 2 (aperta uma vez liga, de novo desliga).
 - Força do shooter em 87%, na variável `SHOOTER_FORCA`.
