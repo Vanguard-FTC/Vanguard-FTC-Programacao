@@ -27,7 +27,9 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | 1 | A (segurar) | Modo mira: gira sozinho até a AprilTag (Limelight) |
 | 2 | L2 (segurar) | Intake 1 |
 | 2 | R2 (segurar) | Intake 2 |
-| 2 | X (PlayStation) / A (Xbox) | Liga/desliga o shooter (força em `SHOOTER_FORCA`) |
+| 2 | X (PlayStation) / A (Xbox) | Shooter 87% (liga/desliga) |
+| 2 | Quadrado (PlayStation) / X (Xbox) | Shooter 83% (liga/desliga) |
+| 2 | Bolinha (PlayStation) / B (Xbox) | Shooter 75% (liga/desliga) |
 
 **Configuração de hardware** (nomes no Robot Configuration do Driver Station):
 
@@ -63,6 +65,34 @@ Antes de usar, confira as constantes no topo do arquivo:
 ## Patch notes
 
 O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
+
+### VanguardTeleop 0.1.4 (2026-11-09)
+- Shooter com 3 forças, cada uma num botão do controle 2: X = 87%, Quadrado = 83%, Bolinha = 75%.
+- Apertar o mesmo botão de novo desliga. Apertar outro botão troca a força na hora.
+
+**Controle 1 (piloto)**
+- Analógico esquerdo: andar (frente, trás e lados)
+- Analógico direito: girar
+- R2 (segurar): modo lento (40%)
+- A no Xbox / X no PlayStation (segurar): modo mira com a Limelight
+
+**Controle 2 (mecanismos)**
+- L2 (segurar): intake 1
+- R2 (segurar): intake 2
+- X no PlayStation / A no Xbox: shooter 87%
+- Quadrado no PlayStation / X no Xbox: shooter 83%
+- Bolinha no PlayStation / B no Xbox: shooter 75%
+
+**Como mudar as forças do shooter**
+1. No OnBot Java, abram o `VanguardTeleop.java`.
+2. Lá no topo, achem estas linhas:
+   ```java
+   static final double SHOOTER_FORCA_X = 0.87;
+   static final double SHOOTER_FORCA_QUADRADO = 0.83;
+   static final double SHOOTER_FORCA_BOLINHA = 0.75;
+   ```
+3. Troquem o número de qualquer uma. `1.0` = 100% (4000 RPM), `0.5` = 50% (2000 RPM).
+4. Cliquem em **Build** e rodem o TeleOp de novo.
 
 ### VanguardAuto 0.1.1 (2026-11-07)
 - O auto agora anda metade da distância: `andarDeLado(50)` virou `andarDeLado(25)`.

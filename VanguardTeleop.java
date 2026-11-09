@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp(name = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardTeleop extends OpMode {
     /** versão do TeleOp: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.1.3";
+    public static final String VERSAO = "0.1.4";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
     public Limelight3A limelight;
@@ -20,18 +20,18 @@ public class VanguardTeleop extends OpMode {
     static final double SHOOTER_TICKS_POR_VOLTA = 28;
     /** 100% do shooter = 4000 RPM (o motor aguenta até ~6000) */
     static final double SHOOTER_RPM_MAX = 4000;
-    /** ===== FORÇA DO SHOOTER: mude aqui pra testar (0.87 = 87%) ===== */
-    static final double SHOOTER_FORCA = 0.87;
-    static final double SHOOTER_RPM = SHOOTER_RPM_MAX * SHOOTER_FORCA;
-    static final double SHOOTER_VELOCIDADE = SHOOTER_RPM * SHOOTER_TICKS_POR_VOLTA / 60; // ticks por segundo
+    /** ===== FORÇAS DO SHOOTER: mude aqui pra testar (0.87 = 87%) ===== */
+    static final double SHOOTER_FORCA_X = 0.87;        // X no PlayStation / A no Xbox
+    static final double SHOOTER_FORCA_QUADRADO = 0.83; // Quadrado no PlayStation / X no Xbox
+    static final double SHOOTER_FORCA_BOLINHA = 0.75;  // Bolinha no PlayStation / B no Xbox
 
     /** potência dos intakes (troque o sinal se girar ao contrário) */
     static final double INTAKE1_FORCA = 1.0;
     static final double INTAKE2_FORCA = 1.0;
 
-    /** shooter ligado/desligado (liga e desliga no X do controle 2) */
-    boolean shooterLigado = false;
-    boolean xAnterior = false;
+    /** força atual do shooter (0 = desligado) */
+    double shooterForca = 0;
+    boolean xAnterior = false, quadradoAnterior = false, bolinhaAnterior = false;
 
     /** potência do drive no modo lento (R2 do controle 1) */
     static final double MODO_LENTO = 0.4;
@@ -95,19 +95,22 @@ public class VanguardTeleop extends OpMode {
         intoiker.setPower(gamepad2.left_trigger > 0.1 ? INTAKE1_FORCA : 0);
         intoiker2.setPower(gamepad2.right_trigger > 0.1 ? INTAKE2_FORCA : 0);
 
-        // shooter: liga enquanto segura o R2, sempre na mesma velocidade
-        // aperta X (controle 2) uma vez liga, aperta de novo desliga
-        // (X no PlayStation = A no Xbox)
-        if (gamepad2.a && !xAnterior) {
-            shooterLigado = !shooterLigado;
-        }
+        // shooter (controle 2): cada botão liga numa força.
+        // apertar o mesmo botão de novo desliga; apertar outro troca a força.
+        if (gamepad2.a && !xAnterior) escolherForca(SHOOTER_FORCA_X);
+        if (gamepad2.x && !quadradoAnterior) escolherForca(SHOOTER_FORCA_QUADRADO);
+        if (gamepad2.b && !bolinhaAnterior) escolherForca(SHOOTER_FORCA_BOLINHA);
         xAnterior = gamepad2.a;
-        shooter.setVelocity(shooterLigado ? SHOOTER_VELOCIDADE : 0);
+        quadradoAnterior = gamepad2.x;
+        bolinhaAnterior = gamepad2.b;
+
+        double shooterRpm = SHOOTER_RPM_MAX * shooterForca;
+        shooter.setVelocity(shooterRpm * SHOOTER_TICKS_POR_VOLTA / 60); // ticks por segundo
 
         telemetry.addData("Versão", "VanguardTeleop " + VERSAO);
-        telemetry.addData("Shooter", shooterLigado ? "LIGADO (%.0f%%)" : "desligado", SHOOTER_FORCA * 100);
+        telemetry.addData("Shooter", shooterForca > 0 ? "LIGADO (%.0f%%)" : "desligado", shooterForca * 100);
         telemetry.addData("Shooter (RPM)", "%.0f / %.0f",
-                shooter.getVelocity() * 60 / SHOOTER_TICKS_POR_VOLTA, SHOOTER_RPM);
+                shooter.getVelocity() * 60 / SHOOTER_TICKS_POR_VOLTA, shooterRpm);
         telemetry.addData("Modo lento", gamepad1.right_trigger > 0.1);
         telemetry.addData("Analógico esq. (X, Y)", "%.2f, %.2f", gamepad1.left_stick_x, gamepad1.left_stick_y);
         telemetry.addData("Potência lf rf lb rb", "%.2f %.2f %.2f %.2f", powers[0], powers[1], powers[2], powers[3]);
@@ -117,6 +120,11 @@ public class VanguardTeleop extends OpMode {
     @Override
     public void stop() {
         if (limelight != null) limelight.stop();
+    }
+
+    /** liga o shooter na força escolhida, ou desliga se já estava nela */
+    public void escolherForca(double forca) {
+        shooterForca = (shooterForca == forca) ? 0 : forca;
     }
 
     public void drive() {
