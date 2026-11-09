@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp(name = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardTeleop extends OpMode {
     /** versão do TeleOp: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.1.5";
+    public static final String VERSAO = "0.1.6";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
     public Limelight3A limelight;
@@ -24,6 +24,7 @@ public class VanguardTeleop extends OpMode {
     static final double SHOOTER_FORCA_X = 0.87;        // X no PlayStation / A no Xbox
     static final double SHOOTER_FORCA_QUADRADO = 0.83; // Quadrado no PlayStation / X no Xbox
     static final double SHOOTER_FORCA_BOLINHA = 0.75;  // Bolinha no PlayStation / B no Xbox
+    static final double SHOOTER_FORCA_TRIANGULO = -1.0; // Triângulo no PlayStation / Y no Xbox (ao contrário)
 
     /** potência dos intakes (troque o sinal se girar ao contrário) */
     static final double INTAKE1_FORCA = 1.0;
@@ -31,7 +32,7 @@ public class VanguardTeleop extends OpMode {
 
     /** força atual do shooter (0 = desligado) */
     double shooterForca = 0;
-    boolean xAnterior = false, quadradoAnterior = false, bolinhaAnterior = false;
+    boolean xAnterior = false, quadradoAnterior = false, bolinhaAnterior = false, trianguloAnterior = false;
 
     /** potência do drive no modo lento (R2 do controle 1) */
     static final double MODO_LENTO = 0.4;
@@ -106,15 +107,18 @@ public class VanguardTeleop extends OpMode {
         if (gamepad2.a && !xAnterior) escolherForca(SHOOTER_FORCA_X);
         if (gamepad2.x && !quadradoAnterior) escolherForca(SHOOTER_FORCA_QUADRADO);
         if (gamepad2.b && !bolinhaAnterior) escolherForca(SHOOTER_FORCA_BOLINHA);
+        if (gamepad2.y && !trianguloAnterior) escolherForca(SHOOTER_FORCA_TRIANGULO);
         xAnterior = gamepad2.a;
         quadradoAnterior = gamepad2.x;
         bolinhaAnterior = gamepad2.b;
+        trianguloAnterior = gamepad2.y;
 
         double shooterRpm = SHOOTER_RPM_MAX * shooterForca;
         shooter.setVelocity(shooterRpm * SHOOTER_TICKS_POR_VOLTA / 60); // ticks por segundo
 
         telemetry.addData("Versão", "VanguardTeleop " + VERSAO);
-        telemetry.addData("Shooter", shooterForca > 0 ? "LIGADO (%.0f%%)" : "desligado", shooterForca * 100);
+        telemetry.addData("Shooter", shooterForca > 0 ? "LIGADO (%.0f%%)"
+                : shooterForca < 0 ? "AO CONTRÁRIO (%.0f%%)" : "desligado", Math.abs(shooterForca) * 100);
         telemetry.addData("Shooter (RPM)", "%.0f / %.0f",
                 shooter.getVelocity() * 60 / SHOOTER_TICKS_POR_VOLTA, shooterRpm);
         telemetry.addData("Modo lento", gamepad1.right_trigger > 0.1);

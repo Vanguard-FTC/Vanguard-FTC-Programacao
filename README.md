@@ -32,6 +32,7 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | 2 | X (PlayStation) / A (Xbox) | Shooter 87% (liga/desliga) |
 | 2 | Quadrado (PlayStation) / X (Xbox) | Shooter 83% (liga/desliga) |
 | 2 | Bolinha (PlayStation) / B (Xbox) | Shooter 75% (liga/desliga) |
+| 2 | Triângulo (PlayStation) / Y (Xbox) | Shooter ao contrário 100% (liga/desliga) |
 
 **Configuração de hardware** (nomes no Robot Configuration do Driver Station):
 
@@ -67,6 +68,25 @@ Antes de usar, confira as constantes no topo do arquivo:
 ## Patch notes
 
 O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
+
+### VanguardTeleop 0.1.6 (2026-11-09)
+- Triângulo (Y no Xbox) no controle 2 liga o shooter ao contrário a 100%. Aperta de novo pra desligar.
+
+**Controle 1 (piloto)**
+- Analógico esquerdo: andar (frente, trás e lados)
+- Analógico direito: girar
+- R2 (segurar): modo lento (40%)
+- A no Xbox / X no PlayStation (segurar): modo mira com a Limelight
+
+**Controle 2 (mecanismos)**
+- L2 (segurar): intake 1 pra frente
+- L1 (segurar): intake 1 ao contrário
+- R2 (segurar): intake 2 pra frente
+- R1 (segurar): intake 2 ao contrário
+- X no PlayStation / A no Xbox: shooter 87%
+- Quadrado no PlayStation / X no Xbox: shooter 83%
+- Bolinha no PlayStation / B no Xbox: shooter 75%
+- Triângulo no PlayStation / Y no Xbox: shooter ao contrário 100%
 
 ### VanguardTeleop 0.1.5 (2026-11-09)
 - Intake 1 ao contrário no L1 e intake 2 ao contrário no R1 (controle 2).
