@@ -29,10 +29,9 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | 2 | L1 (segurar) | Intake 1 ao contrário |
 | 2 | R2 (segurar) | Intake 2 pra frente |
 | 2 | R1 (segurar) | Intake 2 ao contrário |
-| 2 | X (PlayStation) / A (Xbox) | Shooter 87% (liga/desliga) |
-| 2 | Quadrado (PlayStation) / X (Xbox) | Shooter 83% (liga/desliga) |
-| 2 | Bolinha (PlayStation) / B (Xbox) | Shooter 75% (liga/desliga) |
-| 2 | Triângulo (PlayStation) / Y (Xbox) | Shooter ao contrário 100% (liga/desliga) |
+| 2 | X (PlayStation) / A (Xbox) | Liga o shooter em 1% / desliga |
+| 2 | D-pad cima | Shooter +1% |
+| 2 | D-pad baixo | Shooter -1% |
 
 **Configuração de hardware** (nomes no Robot Configuration do Driver Station):
 
@@ -68,6 +67,30 @@ Antes de usar, confira as constantes no topo do arquivo:
 ## Patch notes
 
 O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
+
+### VanguardTeleop 0.1.7 (2026-11-09)
+- Shooter novo: X/A liga em 1% e desliga. D-pad pra cima aumenta 1%, pra baixo diminui 1% (de 1% a 100%).
+- Tirados os botões Quadrado (83%), Bolinha (75%) e Triângulo (ao contrário).
+- O Driver Station mostra a força atual do shooter em %.
+
+**Controle 1 (piloto)**
+- Analógico esquerdo: andar (frente, trás e lados)
+- Analógico direito: girar
+- R2 (segurar): modo lento (40%)
+- A no Xbox / X no PlayStation (segurar): modo mira com a Limelight
+
+**Controle 2 (mecanismos)**
+- L2 (segurar): intake 1 pra frente
+- L1 (segurar): intake 1 ao contrário
+- R2 (segurar): intake 2 pra frente
+- R1 (segurar): intake 2 ao contrário
+- X no PlayStation / A no Xbox: liga o shooter em 1% / desliga
+- D-pad cima: shooter +1%
+- D-pad baixo: shooter -1%
+
+**Como mudar o shooter**
+- No topo do `VanguardTeleop.java`: `SHOOTER_FORCA_INICIAL` (em quanto liga, hoje 1%) e `SHOOTER_PASSO` (quanto cada toque muda, hoje 1%).
+- 100% = 4000 RPM.
 
 ### VanguardTeleop 0.1.6 (2026-11-09)
 - Triângulo (Y no Xbox) no controle 2 liga o shooter ao contrário a 100%. Aperta de novo pra desligar.
