@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp(name = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardTeleop extends OpMode {
     /** versão do TeleOp: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.1.4";
+    public static final String VERSAO = "0.1.5";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
     public Limelight3A limelight;
@@ -91,9 +91,15 @@ public class VanguardTeleop extends OpMode {
     public void loop() {
         drive();
         // intake: os dois motores juntos, no mesmo sentido
-        // intake 1 no L2 e intake 2 no R2 (controle 2), enquanto segura
-        intoiker.setPower(gamepad2.left_trigger > 0.1 ? INTAKE1_FORCA : 0);
-        intoiker2.setPower(gamepad2.right_trigger > 0.1 ? INTAKE2_FORCA : 0);
+        // intake 1: L2 pra frente, L1 ao contrário (controle 2, enquanto segura)
+        if (gamepad2.left_trigger > 0.1) intoiker.setPower(INTAKE1_FORCA);
+        else if (gamepad2.left_bumper) intoiker.setPower(-INTAKE1_FORCA);
+        else intoiker.setPower(0);
+
+        // intake 2: R2 pra frente, R1 ao contrário (controle 2, enquanto segura)
+        if (gamepad2.right_trigger > 0.1) intoiker2.setPower(INTAKE2_FORCA);
+        else if (gamepad2.right_bumper) intoiker2.setPower(-INTAKE2_FORCA);
+        else intoiker2.setPower(0);
 
         // shooter (controle 2): cada botão liga numa força.
         // apertar o mesmo botão de novo desliga; apertar outro troca a força.

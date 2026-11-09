@@ -25,8 +25,10 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | 1 | Analógico direito (X) | Girar |
 | 1 | R2 (segurar) | Modo lento (40%) |
 | 1 | A (segurar) | Modo mira: gira sozinho até a AprilTag (Limelight) |
-| 2 | L2 (segurar) | Intake 1 |
-| 2 | R2 (segurar) | Intake 2 |
+| 2 | L2 (segurar) | Intake 1 pra frente |
+| 2 | L1 (segurar) | Intake 1 ao contrário |
+| 2 | R2 (segurar) | Intake 2 pra frente |
+| 2 | R1 (segurar) | Intake 2 ao contrário |
 | 2 | X (PlayStation) / A (Xbox) | Shooter 87% (liga/desliga) |
 | 2 | Quadrado (PlayStation) / X (Xbox) | Shooter 83% (liga/desliga) |
 | 2 | Bolinha (PlayStation) / B (Xbox) | Shooter 75% (liga/desliga) |
@@ -65,6 +67,24 @@ Antes de usar, confira as constantes no topo do arquivo:
 ## Patch notes
 
 O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
+
+### VanguardTeleop 0.1.5 (2026-11-09)
+- Intake 1 ao contrário no L1 e intake 2 ao contrário no R1 (controle 2).
+
+**Controle 1 (piloto)**
+- Analógico esquerdo: andar (frente, trás e lados)
+- Analógico direito: girar
+- R2 (segurar): modo lento (40%)
+- A no Xbox / X no PlayStation (segurar): modo mira com a Limelight
+
+**Controle 2 (mecanismos)**
+- L2 (segurar): intake 1 pra frente
+- L1 (segurar): intake 1 ao contrário
+- R2 (segurar): intake 2 pra frente
+- R1 (segurar): intake 2 ao contrário
+- X no PlayStation / A no Xbox: shooter 87%
+- Quadrado no PlayStation / X no Xbox: shooter 83%
+- Bolinha no PlayStation / B no Xbox: shooter 75%
 
 ### VanguardTeleop 0.1.4 (2026-11-09)
 - Shooter com 3 forças, cada uma num botão do controle 2: X = 87%, Quadrado = 83%, Bolinha = 75%.
