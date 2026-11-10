@@ -68,6 +68,24 @@ Antes de usar, confira as constantes no topo do arquivo:
 
 O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
 
+### VanguardTeleop 0.1.8 (2026-11-10)
+- Sentido do shooter invertido.
+
+**Controle 1 (piloto)**
+- Analógico esquerdo: andar (frente, trás e lados)
+- Analógico direito: girar
+- R2 (segurar): modo lento (40%)
+- A no Xbox / X no PlayStation (segurar): modo mira com a Limelight
+
+**Controle 2 (mecanismos)**
+- L2 (segurar): intake 1 pra frente
+- L1 (segurar): intake 1 ao contrário
+- R2 (segurar): intake 2 pra frente
+- R1 (segurar): intake 2 ao contrário
+- X no PlayStation / A no Xbox: liga o shooter em 1% / desliga
+- D-pad cima: shooter +1%
+- D-pad baixo: shooter -1%
+
 ### VanguardTeleop 0.1.7 (2026-11-09)
 - Shooter novo: X/A liga em 1% e desliga. D-pad pra cima aumenta 1%, pra baixo diminui 1% (de 1% a 100%).
 - Tirados os botões Quadrado (83%), Bolinha (75%) e Triângulo (ao contrário).

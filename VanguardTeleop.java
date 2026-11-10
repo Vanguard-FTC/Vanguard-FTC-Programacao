@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp(name = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardTeleop extends OpMode {
     /** versão do TeleOp: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.1.7";
+    public static final String VERSAO = "0.1.8";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
     public Limelight3A limelight;
@@ -73,6 +73,7 @@ public class VanguardTeleop extends OpMode {
 
         lF.setDirection(DcMotorSimple.Direction.REVERSE);
         lB.setDirection(DcMotorSimple.Direction.REVERSE);
+        shooter.setDirection(DcMotorSimple.Direction.REVERSE); // shooter invertido
     }
 
     @Override
