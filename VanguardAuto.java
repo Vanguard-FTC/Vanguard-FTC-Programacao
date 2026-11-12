@@ -12,13 +12,13 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         preselectTeleOp = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardAuto extends LinearOpMode {
     /** versão do autônomo: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.3.4";
+    public static final String VERSAO = "0.3.5";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
 
     // ===== SEQUÊNCIA: AJUSTE AQUI =====
     /** força do shooter no auto (%): 100% = 4000 RPM */
-    static final int AUTO_SHOOTER_FORCA = 22;
+    static final int AUTO_SHOOTER_FORCA = 15;
     /** quanto tempo o shooter gira sozinho antes de ligar os intakes (s) */
     static final double AUTO_ESPERA_SHOOTER_S = 10;
     /** quanto tempo os intakes ficam ligados lançando (s) */
