@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @TeleOp(name = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardTeleop extends OpMode {
     /** versão do TeleOp: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.1.16";
+    public static final String VERSAO = "0.1.17";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
 
@@ -20,7 +20,7 @@ public class VanguardTeleop extends OpMode {
     /** 100% do shooter = 4000 RPM (o motor aguenta até ~6000) */
     static final double SHOOTER_RPM_MAX = 4000;
     /** ===== FORÇAS DO SHOOTER (%): mude aqui ===== */
-    static final int SHOOTER_FORCA_QUADRADO = 22;   // Quadrado no PlayStation / X no Xbox
+    static final int SHOOTER_FORCA_QUADRADO = 21;   // Quadrado no PlayStation / X no Xbox
     static final int SHOOTER_FORCA_BOLINHA = 50;    // Bolinha no PlayStation / B no Xbox
     static final int SHOOTER_FORCA_TRIANGULO = -100; // Triângulo no PlayStation / Y no Xbox (ao contrário)
 

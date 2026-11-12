@@ -28,7 +28,7 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | 2 | L1 (segurar) | Intake 1 ao contrário |
 | 2 | R2 (segurar) | Intake 2 pra frente |
 | 2 | R1 (segurar) | Intake 2 ao contrário |
-| 2 | Quadrado (PlayStation) / X (Xbox) | Shooter 22% |
+| 2 | Quadrado (PlayStation) / X (Xbox) | Shooter 21% |
 | 2 | Bolinha (PlayStation) / B (Xbox) | Shooter 50% |
 | 2 | Triângulo (PlayStation) / Y (Xbox) | Shooter ao contrário 100% |
 | 2 | X (PlayStation) / A (Xbox) | Desliga o shooter |
@@ -68,6 +68,25 @@ Antes de usar, confira as constantes no topo do arquivo:
 ## Patch notes
 
 O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
+
+### VanguardTeleop 0.1.17 (2026-11-12)
+- Quadrado (X no Xbox) do shooter agora a 21% (840 RPM).
+
+**Controle 1 (piloto) — luz amarela**
+- Analógico esquerdo: andar (frente, trás e lados)
+- Analógico direito: girar
+- R2 (segurar): modo lento (40%)
+- Analógicos soltos: o robô segura a posição
+
+**Controle 2 (mecanismos) — luz roxa**
+- L2 (segurar): intake 1 pra frente
+- L1 (segurar): intake 1 ao contrário
+- R2 (segurar): intake 2 pra frente
+- R1 (segurar): intake 2 ao contrário
+- Quadrado no PlayStation / X no Xbox: shooter 21%
+- Bolinha no PlayStation / B no Xbox: shooter 50%
+- Triângulo no PlayStation / Y no Xbox: shooter ao contrário 100%
+- X no PlayStation / A no Xbox: desliga o shooter
 
 ### VanguardAuto 0.3.5 (2026-11-12)
 - Shooter no auto agora a 15% (600 RPM).
