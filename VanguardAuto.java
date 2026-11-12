@@ -1,23 +1,20 @@
 package org.firstinspires.ftc.teamcode.util;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-/**
- * Base dos autônomos. Não aparece no Driver Station: quem aparece são
- * VanguardAutoAzul (anda pra esquerda) e VanguardAutoVermelho (anda pra direita).
- */
-public abstract class VanguardAuto extends LinearOpMode {
+// preselectTeleOp: quando o auto acaba, o Driver Station já deixa o TeleOp escolhido
+@Autonomous(name = "VanguardAuto " + VanguardAuto.VERSAO,
+        preselectTeleOp = "VanguardTeleop " + VanguardTeleop.VERSAO)
+public class VanguardAuto extends LinearOpMode {
     /** versão do autônomo: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.2.1";
+    public static final String VERSAO = "0.3.0";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
-
-    /** 1 = anda pra direita (vermelho), -1 = anda pra esquerda (azul) */
-    protected abstract int lado();
 
     // ===== SEQUÊNCIA: AJUSTE AQUI =====
     /** força do shooter no auto (%): 100% = 4000 RPM */
@@ -26,8 +23,6 @@ public abstract class VanguardAuto extends LinearOpMode {
     static final double AUTO_ESPERA_SHOOTER_S = 3;
     /** quanto tempo os intakes ficam ligados lançando (s) */
     static final double AUTO_TEMPO_INTAKE_S = 3;
-    /** quanto anda pro lado no fim (cm) */
-    static final double AUTO_DISTANCIA_CM = 5;
 
     // ===== AJUSTE AQUI PRO ROBÔ DE VOCÊS =====
     /** ticks por volta do motor (goBILDA 312 RPM = 537.7) */
@@ -66,7 +61,7 @@ public abstract class VanguardAuto extends LinearOpMode {
             m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
 
-        telemetry.addLine("VanguardAuto " + (lado() > 0 ? "Vermelho " : "Azul ") + VERSAO + " pronto");
+        telemetry.addLine("VanguardAuto " + VERSAO + " pronto");
         telemetry.update();
         VanguardTeleop.corDosControles(gamepad1, gamepad2); // luz já no INIT
         waitForStart();
@@ -93,9 +88,7 @@ public abstract class VanguardAuto extends LinearOpMode {
         intoiker.setPower(0);
         intoiker2.setPower(0);
         shooter.setVelocity(0);
-
-        // 4. anda pro lado (direita no vermelho, esquerda no azul)
-        andarDeLado(AUTO_DISTANCIA_CM * lado());
+        // o robô não anda. Se precisar andar de novo, use andar(cm) ou andarDeLado(cm) aqui
     }
 
     /** cm positivo = frente, negativo = trás */

@@ -23,7 +23,7 @@ Só mude esses nomes se a equipe pedir explicitamente.
 Toda atualização do TeleOp ou do Auto precisa:
 
 1. **Aumentar a versão** do OpMode alterado, na constante `VERSAO` no topo do arquivo
-   (`VanguardTeleop.java` → `VanguardTeleop`, `VanguardAuto.java` → `VanguardAuto Azul` e `VanguardAuto Vermelho`).
+   (`VanguardTeleop.java` → `VanguardTeleop`, `VanguardAuto.java` → `VanguardAuto`).
    O nome no Driver Station vem dela (ex: `VanguardTeleop 0.1.26`).
    - Mudança normal: aumente o último número (`0.1.0` → `0.1.1`).
    - Mudança grande (ex: novo mecanismo, auto novo): aumente o do meio e zere o último (`0.1.7` → `0.2.0`).

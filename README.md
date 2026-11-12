@@ -8,9 +8,7 @@ Código da equipe **Vanguard** para a [FIRST Tech Challenge](https://www.firstin
 
 ```
 VanguardTeleop.java       # TeleOp
-VanguardAuto.java         # Sequência do autônomo (base, não aparece no Driver Station)
-VanguardAutoAzul.java     # Autônomo da aliança azul (anda pra esquerda)
-VanguardAutoVermelho.java # Autônomo da aliança vermelha (anda pra direita)
+VanguardAuto.java         # Autônomo: shooter + intakes (não anda)
 VanguardTesteMotores.java # Teste: gira cada motor do drive separado
 ```
 
@@ -47,16 +45,15 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | `IntakeMotor2` | Motor 2 do intake |
 | `ShooterMotor` | Motor do shooter |
 
-### VanguardAuto Azul / Vermelho (`VanguardAuto.java`)
+### VanguardAuto (`VanguardAuto.java`)
 
-No Driver Station aparecem dois autos: **VanguardAuto Azul** e **VanguardAuto Vermelho**. Os dois fazem a mesma sequência, que fica no `runOpMode()` do `VanguardAuto.java`:
+Um auto só, que serve pras duas alianças. A sequência fica no `runOpMode()`:
 
 1. Liga o shooter (`AUTO_SHOOTER_FORCA`, hoje 100%) e espera chegar na velocidade (no máximo `AUTO_ESPERA_SHOOTER_S` segundos).
 2. Liga os dois intakes por `AUTO_TEMPO_INTAKE_S` segundos pra lançar os pollen.
-3. Desliga tudo.
-4. Anda `AUTO_DISTANCIA_CM` (hoje 5 cm) pro lado: **azul pra esquerda, vermelho pra direita**.
+3. Desliga tudo. O robô **não anda**.
 
-O movimento usa os encoders dos motores do drive (`RUN_TO_POSITION`), sem odometria.
+As funções `andar(cm)` e `andarDeLado(cm)` continuam no arquivo, caso precisem andar de novo.
 
 Antes de usar, confira as constantes no topo do arquivo:
 
@@ -71,6 +68,10 @@ Antes de usar, confira as constantes no topo do arquivo:
 ## Patch notes
 
 O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
+
+### VanguardAuto 0.3.0 (2026-11-12)
+- Volta a ser um auto só: **VanguardAuto** (os autos Azul e Vermelho foram tirados).
+- O robô não anda mais no auto: só liga o shooter, espera a velocidade, liga os dois intakes por 3 s e desliga tudo.
 
 ### VanguardTeleop 0.1.15 (2026-11-12)
 - Diagnóstico do segurar posição: o Driver Station mostra a posição do encoder de cada roda e o alvo (`lF`, `rF`, `lB`, `rB`).
