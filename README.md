@@ -28,9 +28,10 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | 2 | L1 (segurar) | Intake 1 ao contrário |
 | 2 | R2 (segurar) | Intake 2 pra frente |
 | 2 | R1 (segurar) | Intake 2 ao contrário |
-| 2 | X (PlayStation) / A (Xbox) | Liga o shooter em 1% / desliga |
-| 2 | D-pad cima | Shooter +1% |
-| 2 | D-pad baixo | Shooter -1% |
+| 2 | Quadrado (PlayStation) / X (Xbox) | Shooter 22% |
+| 2 | Bolinha (PlayStation) / B (Xbox) | Shooter 50% |
+| 2 | Triângulo (PlayStation) / Y (Xbox) | Shooter ao contrário 100% |
+| 2 | X (PlayStation) / A (Xbox) | Desliga o shooter |
 
 **Configuração de hardware** (nomes no Robot Configuration do Driver Station):
 
@@ -65,6 +66,30 @@ Antes de usar, confira as constantes no topo do arquivo:
 ## Patch notes
 
 O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
+
+### VanguardTeleop 0.1.13 (2026-11-12)
+- Forças do shooter definidas: Quadrado = 22%, Bolinha = 50%, Triângulo = ao contrário 100%.
+- X (PlayStation) / A (Xbox) desliga o shooter, qualquer que seja a força escolhida.
+- D-pad não mexe mais no shooter.
+
+**Controle 1 (piloto) — luz amarela**
+- Analógico esquerdo: andar (frente, trás e lados)
+- Analógico direito: girar
+- R2 (segurar): modo lento (40%)
+- Analógicos soltos: o robô segura a posição
+
+**Controle 2 (mecanismos) — luz roxa**
+- L2 (segurar): intake 1 pra frente
+- L1 (segurar): intake 1 ao contrário
+- R2 (segurar): intake 2 pra frente
+- R1 (segurar): intake 2 ao contrário
+- Quadrado no PlayStation / X no Xbox: shooter 22%
+- Bolinha no PlayStation / B no Xbox: shooter 50%
+- Triângulo no PlayStation / Y no Xbox: shooter ao contrário 100%
+- X no PlayStation / A no Xbox: desliga o shooter
+
+**Como mudar as forças**
+No topo do `VanguardTeleop.java`: `SHOOTER_FORCA_QUADRADO`, `SHOOTER_FORCA_BOLINHA` e `SHOOTER_FORCA_TRIANGULO` (em %, 100% = 4000 RPM, negativo = ao contrário). Depois cliquem em **Build**.
 
 ### VanguardTeleop 0.1.12 / VanguardAuto 0.1.2 (2026-11-12)
 - Controle 2 vibra quando o shooter chega na velocidade certa (pronto pra lançar).
