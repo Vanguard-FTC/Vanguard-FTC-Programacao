@@ -66,6 +66,34 @@ Antes de usar, confira as constantes no topo do arquivo:
 
 O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
 
+### VanguardTeleop 0.1.12 / VanguardAuto 0.1.2 (2026-11-12)
+- Controle 2 vibra quando o shooter chega na velocidade certa (pronto pra lançar).
+- Faltando 15 segundos, os dois controles vibram 3 vezes pra lembrar do PARK.
+- O Driver Station mostra o tempo restante e se o shooter está pronto.
+- Quando o auto termina, o Driver Station já deixa o VanguardTeleop escolhido.
+
+**Controle 1 (piloto) — luz amarela**
+- Analógico esquerdo: andar (frente, trás e lados)
+- Analógico direito: girar
+- R2 (segurar): modo lento (40%)
+- Analógicos soltos: o robô segura a posição
+
+**Controle 2 (mecanismos) — luz roxa**
+- L2 (segurar): intake 1 pra frente
+- L1 (segurar): intake 1 ao contrário
+- R2 (segurar): intake 2 pra frente
+- R1 (segurar): intake 2 ao contrário
+- X no PlayStation / A no Xbox: liga o shooter em 1% / desliga
+- D-pad cima: shooter +1%
+- D-pad baixo: shooter -1%
+
+**Transição do auto pro TeleOp**
+1. Antes da partida, escolham o **VanguardAuto** e apertem **INIT**. Confiram se o timer de 30 s está ligado (ícone de relógio).
+2. O auto roda e para sozinho nos 30 s.
+3. Nos 8 s de transição, o **VanguardTeleop** já aparece escolhido. Apertem **INIT**.
+4. Quando o juiz der o início do TeleOp, apertem **Play** (▶). O tempo restante começa a contar nessa hora.
+5. Não mexam no robô durante a transição: qualquer movimento é falta.
+
 ### VanguardTeleop 0.1.11 (2026-11-12)
 - Freio nos motores do drive: quando solta o analógico, o robô para na hora.
 - Segurar posição (sempre ligado): com os analógicos do controle 1 soltos, se empurrarem o robô, ele volta pro lugar. Mexeu o analógico, dirige normal.

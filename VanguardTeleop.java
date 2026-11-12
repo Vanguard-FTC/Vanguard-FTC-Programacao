@@ -6,11 +6,12 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardTeleop extends OpMode {
     /** versão do TeleOp: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.1.11";
+    public static final String VERSAO = "0.1.12";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
 
@@ -31,6 +32,15 @@ public class VanguardTeleop extends OpMode {
     boolean shooterLigado = false;
     int shooterForca = SHOOTER_FORCA_INICIAL;
     boolean xAnterior = false, cimaAnterior = false, baixoAnterior = false;
+    /** shooter pronto = velocidade a menos disso do alvo (RPM): o controle 2 vibra */
+    static final double SHOOTER_TOLERANCIA_RPM = 100;
+    boolean shooterPronto = false;
+
+    /** aviso de fim de partida: os dois controles vibram faltando isso (segundos) */
+    static final double TELEOP_DURACAO = 120;
+    static final double AVISO_FIM = 15;
+    ElapsedTime tempo = new ElapsedTime();
+    boolean avisouFim = false;
 
     /** potência do drive no modo lento (R2 do controle 1) */
     static final double MODO_LENTO = 0.4;
@@ -75,6 +85,7 @@ public class VanguardTeleop extends OpMode {
 
     @Override
     public void start() {
+        tempo.reset();
         // cor da luz dos controles de PS5 (vermelho, verde, azul de 0 a 1)
         gamepad1.setLedColor(1, 1, 0, Gamepad.LED_DURATION_CONTINUOUS);   // controle 1: amarelo
         gamepad2.setLedColor(0.6, 0, 1, Gamepad.LED_DURATION_CONTINUOUS); // controle 2: roxo
@@ -119,7 +130,23 @@ public class VanguardTeleop extends OpMode {
         double shooterRpm = shooterLigado ? SHOOTER_RPM_MAX * shooterForca / 100.0 : 0;
         shooter.setVelocity(shooterRpm * SHOOTER_TICKS_POR_VOLTA / 60); // ticks por segundo
 
+        // controle 2 vibra uma vez quando o shooter chega na velocidade
+        double rpmAtual = shooter.getVelocity() * 60 / SHOOTER_TICKS_POR_VOLTA;
+        boolean pronto = shooterLigado && Math.abs(rpmAtual - shooterRpm) < SHOOTER_TOLERANCIA_RPM;
+        if (pronto && !shooterPronto) gamepad2.rumble(300);
+        shooterPronto = pronto;
+
+        // faltando 15 s: os dois controles vibram 3 vezes pra lembrar do PARK
+        double restante = TELEOP_DURACAO - tempo.seconds();
+        if (restante <= AVISO_FIM && !avisouFim) {
+            gamepad1.rumbleBlips(3);
+            gamepad2.rumbleBlips(3);
+            avisouFim = true;
+        }
+
         telemetry.addData("Versão", "VanguardTeleop " + VERSAO);
+        telemetry.addData("Tempo restante", "%.0f s", Math.max(0, restante));
+        telemetry.addData("Shooter pronto", pronto ? "SIM" : "não");
         telemetry.addData("Shooter", shooterLigado ? "LIGADO (%d%%)" : "desligado (%d%%)", shooterForca);
         telemetry.addData("Shooter (RPM)", "%.0f / %.0f",
                 shooter.getVelocity() * 60 / SHOOTER_TICKS_POR_VOLTA, shooterRpm);

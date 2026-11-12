@@ -7,10 +7,12 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "VanguardAuto " + VanguardAuto.VERSAO)
+// preselectTeleOp: quando o auto acaba, o Driver Station já deixa o TeleOp escolhido
+@Autonomous(name = "VanguardAuto " + VanguardAuto.VERSAO,
+        preselectTeleOp = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardAuto extends LinearOpMode {
     /** versão do autônomo: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.1.1";
+    public static final String VERSAO = "0.1.2";
 
     public DcMotorEx lF, rF, lB, rB;
 
