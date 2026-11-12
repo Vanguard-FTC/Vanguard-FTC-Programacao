@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @TeleOp(name = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardTeleop extends OpMode {
     /** versão do TeleOp: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.1.14";
+    public static final String VERSAO = "0.1.15";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
 
@@ -164,6 +164,11 @@ public class VanguardTeleop extends OpMode {
         boolean soltos = Math.abs(forward) < ZONA_MORTA && Math.abs(strafe) < ZONA_MORTA
                 && Math.abs(turn) < ZONA_MORTA;
         telemetry.addData("Segurando posição", soltos ? "SIM" : "não");
+        // diagnóstico: posição de cada roda (encoder) / alvo. Se um número não muda ao girar a roda, o encoder não está ligado
+        telemetry.addData("lF", "%d / %d", lF.getCurrentPosition(), lF.getTargetPosition());
+        telemetry.addData("rF", "%d / %d", rF.getCurrentPosition(), rF.getTargetPosition());
+        telemetry.addData("lB", "%d / %d", lB.getCurrentPosition(), lB.getTargetPosition());
+        telemetry.addData("rB", "%d / %d", rB.getCurrentPosition(), rB.getTargetPosition());
         if (soltos) {
             segurarPosicao();
             return;
