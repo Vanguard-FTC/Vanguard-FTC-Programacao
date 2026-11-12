@@ -7,11 +7,12 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
 @TeleOp(name = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardTeleop extends OpMode {
     /** versão do TeleOp: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.1.8";
+    public static final String VERSAO = "0.1.9";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
     public Limelight3A limelight;
@@ -79,6 +80,11 @@ public class VanguardTeleop extends OpMode {
     @Override
     public void start() {
         if (limelight != null) limelight.start();
+
+        // cor da luz dos controles de PS5 (vermelho, verde, azul de 0 a 1)
+        gamepad1.setLedColor(1, 1, 0, Gamepad.LED_DURATION_CONTINUOUS);   // controle 1: amarelo
+        gamepad2.setLedColor(0.6, 0, 1, Gamepad.LED_DURATION_CONTINUOUS); // controle 2: roxo
+
         lF.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rF.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         lB.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
