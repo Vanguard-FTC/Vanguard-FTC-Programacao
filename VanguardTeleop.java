@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @TeleOp(name = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardTeleop extends OpMode {
     /** versão do TeleOp: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.1.13";
+    public static final String VERSAO = "0.1.14";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
 
@@ -74,6 +74,7 @@ public class VanguardTeleop extends OpMode {
         lF.setDirection(DcMotorSimple.Direction.REVERSE);
         lB.setDirection(DcMotorSimple.Direction.REVERSE);
         shooter.setDirection(DcMotorSimple.Direction.REVERSE); // shooter invertido
+        corDosControles(gamepad1, gamepad2); // luz já no INIT
 
         // freio: quando não tem força, os motores do drive travam em vez de ficar soltos
         for (DcMotorEx m : new DcMotorEx[]{lF, rF, lB, rB}) {
@@ -82,11 +83,15 @@ public class VanguardTeleop extends OpMode {
     }
 
     @Override
+    public void init_loop() {
+        manterLuz();
+    }
+
+    @Override
     public void start() {
         tempo.reset();
-        // cor da luz dos controles de PS5 (vermelho, verde, azul de 0 a 1)
-        gamepad1.setLedColor(1, 1, 0, Gamepad.LED_DURATION_CONTINUOUS);   // controle 1: amarelo
-        gamepad2.setLedColor(0.6, 0, 1, Gamepad.LED_DURATION_CONTINUOUS); // controle 2: roxo
+        corDosControles(gamepad1, gamepad2);
+        luzTimer.reset();
 
         lF.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rF.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -100,6 +105,7 @@ public class VanguardTeleop extends OpMode {
 
     @Override
     public void loop() {
+        manterLuz();
         drive();
         // intake: os dois motores juntos, no mesmo sentido
         // intake 1: L2 pra frente, L1 ao contrário (controle 2, enquanto segura)
@@ -194,6 +200,21 @@ public class VanguardTeleop extends OpMode {
         rF.setPower(powers[1]);
         lB.setPower(powers[2]);
         rB.setPower(powers[3]);
+    }
+
+    /** cor da luz dos controles de PS5 (vermelho, verde, azul de 0 a 1). Usada no TeleOp e nos autos */
+    static void corDosControles(Gamepad g1, Gamepad g2) {
+        g1.setLedColor(1, 1, 0, Gamepad.LED_DURATION_CONTINUOUS);   // controle 1: amarelo
+        g2.setLedColor(0.6, 0, 1, Gamepad.LED_DURATION_CONTINUOUS); // controle 2: roxo
+    }
+
+    /** reaplica a cor a cada 1 s, pra luz não voltar pro padrão */
+    ElapsedTime luzTimer = new ElapsedTime();
+    public void manterLuz() {
+        if (luzTimer.seconds() > 1) {
+            corDosControles(gamepad1, gamepad2);
+            luzTimer.reset();
+        }
     }
 
     /** grava a posição atual das rodas uma vez e fica puxando elas de volta pra ela */

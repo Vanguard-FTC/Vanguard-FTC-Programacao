@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 public abstract class VanguardAuto extends LinearOpMode {
     /** versão do autônomo: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.2.0";
+    public static final String VERSAO = "0.2.1";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
 
@@ -68,7 +68,9 @@ public abstract class VanguardAuto extends LinearOpMode {
 
         telemetry.addLine("VanguardAuto " + (lado() > 0 ? "Vermelho " : "Azul ") + VERSAO + " pronto");
         telemetry.update();
+        VanguardTeleop.corDosControles(gamepad1, gamepad2); // luz já no INIT
         waitForStart();
+        VanguardTeleop.corDosControles(gamepad1, gamepad2);
 
         // ===== SEQUÊNCIA DO AUTÔNOMO =====
         // 1. liga o shooter e espera chegar na velocidade

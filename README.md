@@ -72,6 +72,25 @@ Antes de usar, confira as constantes no topo do arquivo:
 
 O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
 
+### VanguardTeleop 0.1.14 / VanguardAuto 0.2.1 (2026-11-12)
+- Luz dos controles (amarelo e roxo) agora acende já no INIT, também nos autos, e é reaplicada a cada 1 s no TeleOp pra não voltar pro padrão.
+
+**Controle 1 (piloto) — luz amarela**
+- Analógico esquerdo: andar (frente, trás e lados)
+- Analógico direito: girar
+- R2 (segurar): modo lento (40%)
+- Analógicos soltos: o robô segura a posição
+
+**Controle 2 (mecanismos) — luz roxa**
+- L2 (segurar): intake 1 pra frente
+- L1 (segurar): intake 1 ao contrário
+- R2 (segurar): intake 2 pra frente
+- R1 (segurar): intake 2 ao contrário
+- Quadrado no PlayStation / X no Xbox: shooter 22%
+- Bolinha no PlayStation / B no Xbox: shooter 50%
+- Triângulo no PlayStation / Y no Xbox: shooter ao contrário 100%
+- X no PlayStation / A no Xbox: desliga o shooter
+
 ### VanguardAuto 0.2.0 (2026-11-12)
 - Agora são dois autos: **VanguardAuto Azul** (anda pra esquerda) e **VanguardAuto Vermelho** (anda pra direita).
 - Sequência nova: liga o shooter a 100% e espera chegar na velocidade, liga os dois intakes por 3 s pra lançar, desliga tudo e anda 5 cm pro lado.
