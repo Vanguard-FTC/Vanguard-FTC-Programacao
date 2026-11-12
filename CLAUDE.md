@@ -33,6 +33,8 @@ Toda atualização do TeleOp ou do Auto precisa:
 
 ## Outras notas
 
+- **Commits sem atribuição ao Claude:** a equipe pediu pra não colocar `Co-Authored-By: Claude` (nem outra linha de atribuição) nas mensagens de commit, pro Claude não aparecer como contribuidor no GitHub.
+
 - A equipe programa pelo **OnBot Java**: nada de bibliotecas externas (Gradle).
 - Os arquivos `.java` ficam na raiz do repositório, com `package org.firstinspires.ftc.teamcode.util;`.
 - Responda em português, de forma simples e curta.
