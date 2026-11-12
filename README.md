@@ -24,7 +24,6 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | 1 | Analógico esquerdo (X) | Andar de lado (strafe) |
 | 1 | Analógico direito (X) | Girar |
 | 1 | R2 (segurar) | Modo lento (40%) |
-| 1 | A (segurar) | Modo mira: gira sozinho até a AprilTag (Limelight) |
 | 2 | L2 (segurar) | Intake 1 pra frente |
 | 2 | L1 (segurar) | Intake 1 ao contrário |
 | 2 | R2 (segurar) | Intake 2 pra frente |
@@ -44,7 +43,6 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 | `IntakeMotor1` | Motor 1 do intake |
 | `IntakeMotor2` | Motor 2 do intake |
 | `ShooterMotor` | Motor do shooter |
-| `limelight` | Câmera Limelight 3A (pipeline 0 = AprilTag) |
 
 ### VanguardAuto (`VanguardAuto.java`)
 
@@ -67,6 +65,23 @@ Antes de usar, confira as constantes no topo do arquivo:
 ## Patch notes
 
 O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
+
+### VanguardTeleop 0.1.10 (2026-11-12)
+- Câmera Limelight tirada da programação. O modo mira (A/X do controle 1) não existe mais, e o botão ficou livre.
+
+**Controle 1 (piloto) — luz amarela**
+- Analógico esquerdo: andar (frente, trás e lados)
+- Analógico direito: girar
+- R2 (segurar): modo lento (40%)
+
+**Controle 2 (mecanismos) — luz roxa**
+- L2 (segurar): intake 1 pra frente
+- L1 (segurar): intake 1 ao contrário
+- R2 (segurar): intake 2 pra frente
+- R1 (segurar): intake 2 ao contrário
+- X no PlayStation / A no Xbox: liga o shooter em 1% / desliga
+- D-pad cima: shooter +1%
+- D-pad baixo: shooter -1%
 
 ### VanguardTeleop 0.1.9 (2026-11-12)
 - Luz dos controles de PS5: controle 1 fica amarelo e controle 2 fica roxo quando o TeleOp começa.

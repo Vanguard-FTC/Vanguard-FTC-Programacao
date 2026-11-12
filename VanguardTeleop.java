@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.util;
 
-import com.qualcomm.hardware.limelightvision.LLResult;
-import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -12,10 +10,9 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 @TeleOp(name = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardTeleop extends OpMode {
     /** versão do TeleOp: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.1.9";
+    public static final String VERSAO = "0.1.10";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
-    public Limelight3A limelight;
 
     /** ticks por volta do motor do shooter (REV HD Hex sem caixa = 28, máx ~6000 RPM) */
     static final double SHOOTER_TICKS_POR_VOLTA = 28;
@@ -38,12 +35,6 @@ public class VanguardTeleop extends OpMode {
     /** potência do drive no modo lento (R2 do controle 1) */
     static final double MODO_LENTO = 0.4;
 
-    /** modo mira (A do controle 1): força do giro por grau de erro */
-    static final double MIRA_KP = 0.02;
-    /** giro máximo no modo mira */
-    static final double MIRA_MAX = 0.4;
-    /** erro em graus que já conta como mirado */
-    static final double MIRA_TOLERANCIA = 1.0;
 
     /** ordem: [lf, rf, lb, rb] */
     public double[] powers = new double[4];
@@ -57,12 +48,6 @@ public class VanguardTeleop extends OpMode {
         intoiker = hardwareMap.get(DcMotorEx.class, "IntakeMotor1");
         intoiker2 = hardwareMap.get(DcMotorEx.class, "IntakeMotor2");
         shooter = hardwareMap.get(DcMotorEx.class, "ShooterMotor");
-        // a câmera é opcional: sem ela o TeleOp funciona, só não tem modo mira
-        limelight = hardwareMap.tryGet(Limelight3A.class, "limelight");
-        if (limelight != null) {
-            limelight.setPollRateHz(100);
-            limelight.pipelineSwitch(0); // pipeline 0 = AprilTag
-        }
 
         lF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -79,8 +64,6 @@ public class VanguardTeleop extends OpMode {
 
     @Override
     public void start() {
-        if (limelight != null) limelight.start();
-
         // cor da luz dos controles de PS5 (vermelho, verde, azul de 0 a 1)
         gamepad1.setLedColor(1, 1, 0, Gamepad.LED_DURATION_CONTINUOUS);   // controle 1: amarelo
         gamepad2.setLedColor(0.6, 0, 1, Gamepad.LED_DURATION_CONTINUOUS); // controle 2: roxo
@@ -135,30 +118,10 @@ public class VanguardTeleop extends OpMode {
         telemetry.update();
     }
 
-    @Override
-    public void stop() {
-        if (limelight != null) limelight.stop();
-    }
-
     public void drive() {
         double forward = -gamepad1.left_stick_y;
         double strafe = -gamepad1.left_stick_x * 1.15;
         double turn = gamepad1.right_stick_x;
-
-        // modo mira: enquanto segura o A, o robô gira sozinho até a AprilTag
-        if (gamepad1.a && limelight == null) {
-            telemetry.addData("Mira", "Limelight não configurada");
-        } else if (gamepad1.a) {
-            LLResult result = limelight.getLatestResult();
-            if (result != null && result.isValid()) {
-                double erro = result.getTx(); // graus: positivo = alvo à direita
-                turn = Math.abs(erro) < MIRA_TOLERANCIA ? 0
-                        : Math.max(-MIRA_MAX, Math.min(MIRA_MAX, erro * MIRA_KP));
-                telemetry.addData("Mira", Math.abs(erro) < MIRA_TOLERANCIA ? "MIRADO" : "erro %.1f°", erro);
-            } else {
-                telemetry.addData("Mira", "sem alvo");
-            }
-        }
 
         // modo lento: enquanto segura o R2 do controle 1
         if (gamepad1.right_trigger > 0.1) {
