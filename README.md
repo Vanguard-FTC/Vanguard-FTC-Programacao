@@ -66,6 +66,26 @@ Antes de usar, confira as constantes no topo do arquivo:
 
 O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
 
+### VanguardTeleop 0.1.11 (2026-11-12)
+- Freio nos motores do drive: quando solta o analógico, o robô para na hora.
+- Segurar posição (sempre ligado): com os analógicos do controle 1 soltos, se empurrarem o robô, ele volta pro lugar. Mexeu o analógico, dirige normal.
+- A força pra voltar fica em `SEGURAR_FORCA` (hoje 0.5) no topo do arquivo.
+
+**Controle 1 (piloto) — luz amarela**
+- Analógico esquerdo: andar (frente, trás e lados)
+- Analógico direito: girar
+- R2 (segurar): modo lento (40%)
+- Analógicos soltos: o robô segura a posição
+
+**Controle 2 (mecanismos) — luz roxa**
+- L2 (segurar): intake 1 pra frente
+- L1 (segurar): intake 1 ao contrário
+- R2 (segurar): intake 2 pra frente
+- R1 (segurar): intake 2 ao contrário
+- X no PlayStation / A no Xbox: liga o shooter em 1% / desliga
+- D-pad cima: shooter +1%
+- D-pad baixo: shooter -1%
+
 ### VanguardTeleop 0.1.10 (2026-11-12)
 - Câmera Limelight tirada da programação. O modo mira (A/X do controle 1) não existe mais, e o botão ficou livre.
 

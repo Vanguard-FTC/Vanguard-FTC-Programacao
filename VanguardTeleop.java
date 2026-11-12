@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 @TeleOp(name = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardTeleop extends OpMode {
     /** versão do TeleOp: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.1.10";
+    public static final String VERSAO = "0.1.11";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
 
@@ -34,6 +34,12 @@ public class VanguardTeleop extends OpMode {
 
     /** potência do drive no modo lento (R2 do controle 1) */
     static final double MODO_LENTO = 0.4;
+
+    /** segurar posição: força que as rodas usam pra voltar pro lugar quando empurram o robô */
+    static final double SEGURAR_FORCA = 0.5;
+    /** abaixo disso o analógico conta como solto */
+    static final double ZONA_MORTA = 0.05;
+    boolean segurando = false;
 
 
     /** ordem: [lf, rf, lb, rb] */
@@ -60,6 +66,11 @@ public class VanguardTeleop extends OpMode {
         lF.setDirection(DcMotorSimple.Direction.REVERSE);
         lB.setDirection(DcMotorSimple.Direction.REVERSE);
         shooter.setDirection(DcMotorSimple.Direction.REVERSE); // shooter invertido
+
+        // freio: quando não tem força, os motores do drive travam em vez de ficar soltos
+        for (DcMotorEx m : new DcMotorEx[]{lF, rF, lB, rB}) {
+            m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        }
     }
 
     @Override
@@ -123,6 +134,22 @@ public class VanguardTeleop extends OpMode {
         double strafe = -gamepad1.left_stick_x * 1.15;
         double turn = gamepad1.right_stick_x;
 
+        // segurar posição: com os analógicos soltos, o robô volta pro lugar se for empurrado
+        boolean soltos = Math.abs(forward) < ZONA_MORTA && Math.abs(strafe) < ZONA_MORTA
+                && Math.abs(turn) < ZONA_MORTA;
+        telemetry.addData("Segurando posição", soltos ? "SIM" : "não");
+        if (soltos) {
+            segurarPosicao();
+            return;
+        }
+        if (segurando) {
+            // o piloto mexeu: volta pro controle normal
+            for (DcMotorEx m : new DcMotorEx[]{lF, rF, lB, rB}) {
+                m.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            }
+            segurando = false;
+        }
+
         // modo lento: enquanto segura o R2 do controle 1
         if (gamepad1.right_trigger > 0.1) {
             forward *= MODO_LENTO;
@@ -147,6 +174,18 @@ public class VanguardTeleop extends OpMode {
         rF.setPower(powers[1]);
         lB.setPower(powers[2]);
         rB.setPower(powers[3]);
+    }
+
+    /** grava a posição atual das rodas uma vez e fica puxando elas de volta pra ela */
+    public void segurarPosicao() {
+        if (!segurando) {
+            for (DcMotorEx m : new DcMotorEx[]{lF, rF, lB, rB}) {
+                m.setTargetPosition(m.getCurrentPosition());
+                m.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                m.setPower(SEGURAR_FORCA);
+            }
+            segurando = true;
+        }
     }
 
     public double maximum(double[] vals) {
