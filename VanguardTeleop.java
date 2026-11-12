@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @TeleOp(name = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardTeleop extends OpMode {
     /** versão do TeleOp: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.1.15";
+    public static final String VERSAO = "0.1.16";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
 
@@ -158,7 +158,7 @@ public class VanguardTeleop extends OpMode {
     public void drive() {
         double forward = -gamepad1.left_stick_y;
         double strafe = -gamepad1.left_stick_x * 1.15;
-        double turn = gamepad1.right_stick_x;
+        double turn = -gamepad1.right_stick_x; // invertido
 
         // segurar posição: com os analógicos soltos, o robô volta pro lugar se for empurrado
         boolean soltos = Math.abs(forward) < ZONA_MORTA && Math.abs(strafe) < ZONA_MORTA

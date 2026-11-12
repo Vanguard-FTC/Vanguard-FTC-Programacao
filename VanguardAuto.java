@@ -12,15 +12,15 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         preselectTeleOp = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardAuto extends LinearOpMode {
     /** versão do autônomo: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.3.1";
+    public static final String VERSAO = "0.3.2";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
 
     // ===== SEQUÊNCIA: AJUSTE AQUI =====
     /** força do shooter no auto (%): 100% = 4000 RPM */
     static final int AUTO_SHOOTER_FORCA = 22;
-    /** tempo máximo esperando o shooter chegar na velocidade (s) */
-    static final double AUTO_ESPERA_SHOOTER_S = 3;
+    /** quanto tempo o shooter gira sozinho antes de ligar os intakes (s) */
+    static final double AUTO_ESPERA_SHOOTER_S = 10;
     /** quanto tempo os intakes ficam ligados lançando (s) */
     static final double AUTO_TEMPO_INTAKE_S = 3;
 
@@ -68,15 +68,15 @@ public class VanguardAuto extends LinearOpMode {
         VanguardTeleop.corDosControles(gamepad1, gamepad2);
 
         // ===== SEQUÊNCIA DO AUTÔNOMO =====
-        // 1. liga o shooter e espera chegar na velocidade
+        // 1. liga o shooter e deixa girando por AUTO_ESPERA_SHOOTER_S segundos
         double rpmAlvo = VanguardTeleop.SHOOTER_RPM_MAX * AUTO_SHOOTER_FORCA / 100.0;
         shooter.setVelocity(rpmAlvo * VanguardTeleop.SHOOTER_TICKS_POR_VOLTA / 60);
         ElapsedTime espera = new ElapsedTime();
         while (opModeIsActive() && espera.seconds() < AUTO_ESPERA_SHOOTER_S) {
             double rpm = shooter.getVelocity() * 60 / VanguardTeleop.SHOOTER_TICKS_POR_VOLTA;
             telemetry.addData("Shooter (RPM)", "%.0f / %.0f", rpm, rpmAlvo);
+            telemetry.addData("Ligando intakes em", "%.0f s", AUTO_ESPERA_SHOOTER_S - espera.seconds());
             telemetry.update();
-            if (Math.abs(rpm - rpmAlvo) < VanguardTeleop.SHOOTER_TOLERANCIA_RPM) break;
         }
 
         // 2. liga os dois intakes pra lançar os pollen
