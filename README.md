@@ -49,9 +49,10 @@ Drive mecanum controlado pelo gamepad 1 e intake pelo gamepad 2.
 
 Um auto só, que serve pras duas alianças. A sequência fica no `runOpMode()`:
 
-1. Liga o shooter (`AUTO_SHOOTER_FORCA`, hoje 22%) e deixa girando por `AUTO_ESPERA_SHOOTER_S` segundos (hoje 10 s).
-2. Liga os dois intakes por `AUTO_TEMPO_INTAKE_S` segundos pra lançar os pollen.
-3. Desliga tudo. O robô **não anda**.
+1. Anda `AUTO_ANDAR_CM` pra frente (hoje 1 cm).
+2. Liga o shooter (`AUTO_SHOOTER_FORCA`, hoje 22%) e deixa girando por `AUTO_ESPERA_SHOOTER_S` segundos (hoje 10 s).
+3. Liga os dois intakes por `AUTO_TEMPO_INTAKE_S` segundos pra lançar os pollen.
+4. Desliga tudo.
 
 As funções `andar(cm)` e `andarDeLado(cm)` continuam no arquivo, caso precisem andar de novo.
 
@@ -68,6 +69,9 @@ Antes de usar, confira as constantes no topo do arquivo:
 ## Patch notes
 
 O número aparece no nome do OpMode no Driver Station (ex: `VanguardTeleop 0.1.0`).
+
+### VanguardAuto 0.3.3 (2026-11-12)
+- Antes de tudo, o auto anda 1 cm pra frente (`AUTO_ANDAR_CM`). Depois segue igual: shooter 22% por 10 s, intakes por 3 s.
 
 ### VanguardTeleop 0.1.16 / VanguardAuto 0.3.2 (2026-11-12)
 - TeleOp: giro do controle 1 (analógico direito) invertido.
