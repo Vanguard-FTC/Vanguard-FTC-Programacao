@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         preselectTeleOp = "VanguardTeleop " + VanguardTeleop.VERSAO)
 public class VanguardAuto extends LinearOpMode {
     /** versão do autônomo: aumente a cada atualização (ver README, Patch notes) */
-    public static final String VERSAO = "0.3.3";
+    public static final String VERSAO = "0.3.4";
 
     public DcMotorEx lF, rF, lB, rB, intoiker, intoiker2, shooter;
 
@@ -21,8 +21,6 @@ public class VanguardAuto extends LinearOpMode {
     static final int AUTO_SHOOTER_FORCA = 22;
     /** quanto tempo o shooter gira sozinho antes de ligar os intakes (s) */
     static final double AUTO_ESPERA_SHOOTER_S = 10;
-    /** quanto anda pra frente antes de tudo (cm) */
-    static final double AUTO_ANDAR_CM = 1;
     /** quanto tempo os intakes ficam ligados lançando (s) */
     static final double AUTO_TEMPO_INTAKE_S = 3;
 
@@ -70,9 +68,6 @@ public class VanguardAuto extends LinearOpMode {
         VanguardTeleop.corDosControles(gamepad1, gamepad2);
 
         // ===== SEQUÊNCIA DO AUTÔNOMO =====
-        // 0. anda um pouquinho pra frente
-        andar(AUTO_ANDAR_CM);
-
         // 1. liga o shooter e deixa girando por AUTO_ESPERA_SHOOTER_S segundos
         double rpmAlvo = VanguardTeleop.SHOOTER_RPM_MAX * AUTO_SHOOTER_FORCA / 100.0;
         shooter.setVelocity(rpmAlvo * VanguardTeleop.SHOOTER_TICKS_POR_VOLTA / 60);
